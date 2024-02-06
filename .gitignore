@@ -1,0 +1,3 @@
+application/Data/*
+application/userPreferences.*
+application/Project/DerivedData/*
