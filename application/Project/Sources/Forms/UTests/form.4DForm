@@ -1,0 +1,80 @@
+{
+	"$4d": {
+		"version": "1",
+		"kind": "form"
+	},
+	"windowSizingX": "variable",
+	"windowSizingY": "variable",
+	"windowMinWidth": 0,
+	"windowMinHeight": 0,
+	"windowMaxWidth": 32767,
+	"windowMaxHeight": 32767,
+	"rightMargin": 20,
+	"bottomMargin": 20,
+	"events": [
+		"onLoad",
+		"onValidate",
+		"onClick",
+		"onOutsideCall",
+		"onDoubleClick",
+		"onDrop",
+		"onMenuSelect",
+		"onPluginArea",
+		"onDragOver",
+		"onUnload",
+		"onTimer",
+		"onAfterKeystroke",
+		"onAfterEdit",
+		"onBeginDragOver",
+		"onBoundVariableChange",
+		"onPageChange"
+	],
+	"windowTitle": "",
+	"destination": "detailScreen",
+	"pages": [
+		{
+			"objects": {}
+		},
+		{
+			"objects": {
+				"UTests_hl": {
+					"type": "list",
+					"left": 29,
+					"top": 26,
+					"width": 553,
+					"height": 288,
+					"events": [
+						"onClick",
+						"onDoubleClick",
+						"onSelectionChange"
+					],
+					"dataSource": "",
+					"focusable": false,
+					"borderStyle": "none",
+					"method": "ObjectMethods/UTests_hl.4dm",
+					"sizingX": "fixed",
+					"sizingY": "grow"
+				},
+				"Input4": {
+					"type": "input",
+					"left": 602,
+					"top": 25,
+					"width": 417,
+					"height": 289,
+					"dataSource": "Form:C1466.test.message",
+					"sizingX": "grow",
+					"sizingY": "grow"
+				}
+			}
+		}
+	],
+	"geometryStamp": 63,
+	"method": "method.4dm",
+	"editor": {
+		"activeView": "View 1",
+		"defaultView": "View 1",
+		"views": {
+			"View 1": {}
+		}
+	}
+}
