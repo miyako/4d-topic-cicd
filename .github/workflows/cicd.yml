@@ -22,5 +22,5 @@ jobs:
           path: compiler
       - name: compile project
         run: |
-          tool4d.app/Contents/MacOS/tool4d --startup-method=build --user-param=./application/buildApp.4DSettings,./application/Project/application.4DProject  --dataless
+          tool4d.app/Contents/MacOS/tool4d ./compiler/Project/compiler.4DProject --startup-method=build --user-param=./application/Settings/buildApp.4DSettings,./application/Project/application.4DProject  --dataless
           
