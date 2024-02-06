@@ -2,3 +2,4 @@ application/Data/*
 application/userPreferences.*
 application/Project/DerivedData/*
 actions-runner
+application/Libraries/lib4d-arm64.dylib
