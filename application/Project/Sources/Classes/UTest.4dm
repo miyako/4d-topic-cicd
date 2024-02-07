@@ -1,6 +1,7 @@
 Class constructor
 	This:C1470.UTest_result:=[]
 	This:C1470.CLI:=cs:C1710.CLI.new()
+	This:C1470.CLI.logo().version()
 	
 Function runAllTests() : cs:C1710.UTest
 	$start:=Milliseconds:C459
