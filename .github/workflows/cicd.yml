@@ -6,7 +6,23 @@ on:
 
 jobs:
 
+  test:
+    runs-on: [self-hosted]
+  
+    steps:
+      - name: run unit tests
+        run: |
+          tool4d.app/Contents/MacOS/tool4d ./application/Project/application.4DProject --startup-method=test --dataless
+          UTestResult=`cat UTestResult.txt`
+          echo $UTestResult
+          value=`head -n 1 UTestResult.txt`
+          rm UTestResult.txt
+          if [ "$value" = "Unit tests failed" ]
+          then
+            exit 1
+          fi
   compile:
+    needs: test
     runs-on: [self-hosted]
 
     steps:
@@ -22,5 +38,5 @@ jobs:
           path: compiler
       - name: compile project
         run: |
-          tool4d.app/Contents/MacOS/tool4d ./compiler/Project/compiler.4DProject --startup-method=build --user-param=$PWD/application/Settings/buildApp.4DSettings,$PWD/application/Project/application.4DProject  --dataless
+          tool4d.app/Contents/MacOS/tool4d ./compiler/Project/compiler.4DProject --startup-method=build --user-param=$PWD/application/Settings/buildApp.4DSettings,$PWD/application/Project/application.4DProject --dataless
           

@@ -1,5 +1,6 @@
 Class constructor
 	This:C1470.UTest_result:=[]
+	This:C1470.CLI:=cs:C1710.CLI.new()
 	
 Function runAllTests() : cs:C1710.UTest
 	$start:=Milliseconds:C459
@@ -23,18 +24,56 @@ Function runAllTests() : cs:C1710.UTest
 Function resultText()->$resultText : Text
 	$testsFailed:=This:C1470.UTest_result.query("success == :1"; False:C215)
 	
-	$resultText:=$testsFailed.length>0 ? "Unit tests failed" : "Unit tests passed"
+	If ($testsFailed.length>0)
+		$resultText:="Unit tests failed"
+		This:C1470.CLI.print("Unit tests "; "bold").print("failed"; "196;bold").LF()
+	Else 
+		$resultText:="Unit tests passed"
+		This:C1470.CLI.print("Unit tests "; "bold").print("passed"; "82;bold").LF()
+	End if 
 	$resultText+="\r"
-	$resultText+="Tests: "+String:C10(This:C1470.UTest_result.length)+"\r"+\
-		String:C10($testsFailed.length)+" failed\r"+\
-		String:C10(This:C1470.UTest_result.length-$testsFailed.length)+" passed\r"+\
-		"Time: "+String:C10(This:C1470.time)+" ms\r\r"
 	
-	$resultText+="------------------------------\r"
-	$resultText+=$testsFailed.extract("message").join("------------------------------\r")
+	$message:="Tests: "+String:C10(This:C1470.UTest_result.length)
+	This:C1470.CLI.print($message; "244").LF()
+	$resultText+=$message
+	$resultText+="\r"
 	
-Function _build_result($testResult : Boolean; $callChain : Collection; $description : Text; $excpected : Variant; $received : Variant; $msg : Text)->$result : Object
-	$objTest:=Position:C15("."; $callChain[1].name)>0 ? \
+	$message:=String:C10($testsFailed.length)+" failed"
+	This:C1470.CLI.print($message; "244").LF()
+	$resultText+=$message
+	$resultText+="\r"
+	
+	$message:=String:C10(This:C1470.UTest_result.length-$testsFailed.length)+" passed"
+	This:C1470.CLI.print($message; "244").LF()
+	$resultText+=$message
+	$resultText+="\r"
+	
+	$message:="Time: "+String:C10(This:C1470.time)+" ms"
+	This:C1470.CLI.print($message; "244").LF()
+	$resultText+=$message
+	$resultText+="\r"
+	$resultText+="\r"
+	
+	$hr:="------------------------------"
+	This:C1470.CLI.print($hr; "244").LF()
+	$resultText+=$hr
+	$resultText+="\r"
+	
+	$messages:=$testsFailed.extract("message")
+	
+	If ($messages.length#0)
+		$last:=$messages.length-1
+		For ($i; 0; $last)
+			This:C1470.CLI.print($messages[$i]; "244")
+			If ($i#$last)
+				This:C1470.CLI.print($hr; "244").LF()
+			End if 
+		End for 
+		$resultText+=$messages.join($hr+"\r")
+	End if 
+	
+Function _build_result($testResult : Boolean; $callChain : Collection; $description : Text; $expected : Variant; $received : Variant; $msg : Text)->$result : Object
+	$objTest:=Position:C15("."; $callChain[1].name; *)>0 ? \
 		{class: Split string:C1554($callChain[1].name; ".")[0]; function: Split string:C1554($callChain[1].name; ".")[1]} : \
 		{class: Null:C1517; function: $callChain[1].name}
 	
@@ -49,9 +88,20 @@ Function _build_result($testResult : Boolean; $callChain : Collection; $descript
 	
 	$result.message:="--> "+$description+"\r"
 	$result.message+="Function: "+$callChain[1].name+" - Line: "+String:C10($callChain[1].line)+"\r"+\
-		"Expected: "+String:C10($excpected)+"\r"+\
+		"Expected: "+String:C10($expected)+"\r"+\
 		"Recevied: "+String:C10($received)+"\r"+\
 		$msg+"\r"
+	
+	This:C1470.CLI.print($result.class; "39").print("."; "bold").print($result.function; "100").LF()
+	This:C1470.CLI.print($result.description; "244").LF()
+	This:C1470.CLI.print("expected: "; "244").print(String:C10($expected); "244").LF()
+	This:C1470.CLI.print("recevied: "; "244").print(String:C10($received); "244").LF()
+	
+	If ($testResult)
+		This:C1470.CLI.print("success"; "82;bold").LF()
+	Else 
+		This:C1470.CLI.print("failure"; "196;bold").LF()
+	End if 
 	
 Function describe($description : Text) : cs:C1710.UTest
 	This:C1470.description:=$description
@@ -69,6 +119,7 @@ Function toBe($expectedValue : Variant) : cs:C1710.UTest
 		ON ERR CALL:C155("onErrorMth")
 		ASSERT:C1129($expectedValue=This:C1470.receivedValue)
 		ON ERR CALL:C155($calledmth)
+		
 		This:C1470.UTest_result.push(This:C1470._build_result(errorMessage="" ? True:C214 : False:C215; Get call chain:C1662; This:C1470.description; $expectedValue; This:C1470.receivedValue; errorMessage))
 		This:C1470._clearTmp()
 		return This:C1470
