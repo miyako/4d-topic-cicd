@@ -18,9 +18,9 @@ jobs:
       - name: run unit tests
         run: |
           tool4d.app/Contents/MacOS/tool4d ./application/Project/application.4DProject --startup-method=test --dataless
-          UTestResult=`cat UTestResult.txt`
+          UTestResult=`cat ./application/UTestResult.txt`
           echo $UTestResult
-          value=`head -n 1 UTestResult.txt`
+          value=`head -n 1 ./application/UTestResult.txt`
           rm UTestResult.txt
           if [ "$value" = "Unit tests failed" ]
           then
