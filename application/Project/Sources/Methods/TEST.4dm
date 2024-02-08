@@ -10,6 +10,10 @@ https://developer.4d.com/docs/Admin/cli/#tool4d
 	
 */
 	
+	var $CLI : cs:C1710.CLI
+	$CLI:=cs:C1710.CLI.new()
+	$CLI.logo().version()
+	
 	var $UTest : cs:C1710.UTest
 	
 	$UTest:=cs:C1710.UTest.new()
