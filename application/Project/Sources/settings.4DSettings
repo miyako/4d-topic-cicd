@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?><preferences stamp="3">
+	<com.4d>
+		<interface>
+			<user sdi_application="true" splash_screen="false"/>
+		</interface>
+		<general startup_environnement="1"/>
+	</com.4d>
+</preferences>

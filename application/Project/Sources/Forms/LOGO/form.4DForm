@@ -1,0 +1,70 @@
+{
+	"css": "form.css",
+	"destination": "detailScreen",
+	"rightMargin": 10,
+	"bottomMargin": 10,
+	"markerHeader": 15,
+	"markerBody": 200,
+	"markerBreak": 220,
+	"markerFooter": 240,
+	"events": [
+		"onLoad",
+		"onUnload",
+		"onTimer"
+	],
+	"pageFormat": {
+		"paperName": "DIN A4",
+		"paperWidth": "595pt",
+		"paperHeight": "842pt"
+	},
+	"pages": [
+		{
+			"objects": {}
+		},
+		{
+			"objects": {
+				"Logo": {
+					"type": "input",
+					"left": 10,
+					"top": 10,
+					"width": 225,
+					"height": 317,
+					"dataSourceTypeHint": "picture",
+					"enterable": false,
+					"contextMenu": "none",
+					"focusable": false,
+					"pictureFormat": "proportionalTopLeft",
+					"fill": "transparent",
+					"dragging": "none",
+					"dropping": "none",
+					"dataSource": "Form:C1466.logo",
+					"sizingX": "grow",
+					"sizingY": "grow"
+				}
+			}
+		}
+	],
+	"editor": {
+		"activeView": "Ebene 1",
+		"defaultView": "Ebene 1",
+		"views": {
+			"Ebene 1": {},
+			"Ebene 2": {},
+			"Ebene 3": {},
+			"Ebene 4": {},
+			"Ebene 5": {},
+			"Ebene 6": {},
+			"Ebene 7": {},
+			"Ebene 8": {},
+			"Ebene 9": {}
+		}
+	},
+	"$4d": {
+		"version": "1",
+		"kind": "form"
+	},
+	"geometryStamp": 214,
+	"method": "method.4dm",
+	"windowSizingX": "fixed",
+	"windowSizingY": "fixed"
+}
