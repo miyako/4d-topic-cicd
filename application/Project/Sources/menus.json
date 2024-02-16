@@ -22,6 +22,10 @@
 			"title": ":xliff:CommonMenuFile",
 			"items": [
 				{
+					"title": "LOGO…",
+					"method": "logo"
+				},
+				{
 					"title": ":xliff:CommonMenuItemQuit",
 					"shortcutAccel": true,
 					"shortcutKey": "Q",

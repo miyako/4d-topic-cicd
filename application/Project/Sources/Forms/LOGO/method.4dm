@@ -25,7 +25,13 @@ Case of
 		SET TIMER:C645(0)
 		
 		If (Version type:C495 ?? Merged application:K5:28) && (Is Windows:C1573) && (Get application info:C1599.SDIMode)
-			QUIT 4D:C291
+			ARRAY LONGINT:C221($windows; 0)
+			WINDOW LIST:C442($windows)
+			
+			If (Size of array:C274($windows)=1)
+				QUIT 4D:C291
+			End if 
+			
 		End if 
 		
 End case 
