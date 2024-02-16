@@ -3,6 +3,6 @@
 <base name="application" uuid="AB4C29D241C94D55B71531AE4389116C" collation_locale="ja">
 	<schema name="DEFAULT_SCHEMA"/>
 	<base_extra>
-		<journal_file journal_file_enabled="true"/>
+		<journal_file journal_file_enabled="false"/>
 	</base_extra>
 </base>
