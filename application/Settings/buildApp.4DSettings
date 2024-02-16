@@ -4,15 +4,15 @@
   <BuildApp>
     <BuildCompiled>False</BuildCompiled>
     <IncludeAssociatedFolders>True</IncludeAssociatedFolders>
-    <BuildComponent>True</BuildComponent>
-    <BuildApplicationSerialized>False</BuildApplicationSerialized>
+    <BuildComponent>False</BuildComponent>
+    <BuildApplicationSerialized>True</BuildApplicationSerialized>
     <RuntimeVL>
       <LastDataPathLookup>ByAppName</LastDataPathLookup>
     </RuntimeVL>
     <SourcesFiles>
       <RuntimeVL>
         <RuntimeVLIncludeIt>True</RuntimeVLIncludeIt>
-      </RuntimeVL>
+        <RuntimeVLMacFolder>Macintosh HD:Applications:4D v20 R3:4D Volume Desktop.app:</RuntimeVLMacFolder></RuntimeVL>
       <CS>
         <ServerIncludeIt>False</ServerIncludeIt>
         <ClientMacIncludeIt>False</ClientMacIncludeIt>
@@ -38,10 +38,20 @@
       <ItemsCount>0</ItemsCount>
     </ArrayExcludedPluginID>
     <ArrayExcludedComponentName>
-      <ItemsCount>0</ItemsCount>
+      <ItemsCount>6</ItemsCount>
+      <Item1>4D SVG</Item1>
+      <Item2>4D Progress</Item2>
+      <Item3>4D ViewPro</Item3>
+      <Item4>4D NetKit</Item4>
+      <Item5>4D WritePro Interface</Item5>
+      <Item6>4D Widgets</Item6>
     </ArrayExcludedComponentName>
     <ArrayExcludedModuleName>
-      <ItemsCount>0</ItemsCount>
+      <ItemsCount>4</ItemsCount>
+      <Item1>CEF</Item1>
+      <Item2>MeCab</Item2>
+      <Item3>SpellChecker</Item3>
+      <Item4>4D Updater</Item4>
     </ArrayExcludedModuleName>
     <Licenses>
       <ArrayLicenseMac>
@@ -54,5 +64,6 @@
       <AdHocSign>True</AdHocSign>
     </SignApplication>
   </BuildApp>
+
 
 </Preferences4D>
