@@ -15,26 +15,32 @@ on:
 jobs:
 
     bump:
-        runs-on: ubuntu-latest
-        
-        steps:
-          - uses: actions/checkout@v4
-          - name: git config 
-            run: |
-              git config --local user.name "GitHub Action"
-              git config --local user.email "action@github.com"          
-          - name: major
-            if: ${{ github.event.inputs.mode == 'major' }} 
-            run: |
-              npm version major
-          - name: minor
-            if: ${{ github.event.inputs.mode == 'minor' }} 
-            run: |
-              npm version minor
-          - name: patch
-            if: ${{ github.event.inputs.mode == 'patch' }} 
-            run: |
-              npm version patch
-          - name: git commit 
-            run: |
-              git push
+      runs-on: ubuntu-latest
+      
+      steps:
+        - uses: actions/checkout@v4
+        - name: git config 
+          run: |
+            git config --local user.name "GitHub Action"
+            git config --local user.email "action@github.com"          
+        - name: major
+          if: ${{ github.event.inputs.mode == 'major' }} 
+          run: |
+            npm version major
+        - name: minor
+          if: ${{ github.event.inputs.mode == 'minor' }} 
+          run: |
+            npm version minor
+        - name: patch
+          if: ${{ github.event.inputs.mode == 'patch' }} 
+          run: |
+            npm version patch
+
+    push:
+      needs: bump
+      runs-on: ubuntu-latest   
+      
+      steps:
+        - name: git push
+          run: |
+            git push
