@@ -1,4 +1,4 @@
-name: publish
+name: "publish"
 
 on:
   workflow_dispatch:
@@ -7,9 +7,9 @@ on:
         type: choice
         description: semantic versioning
         options: 
-        - major
-        - minor 
         - patch
+        - minor 
+        - major
         required: true
 
 jobs:
@@ -19,6 +19,7 @@ jobs:
 
     steps:
     - name: bump semantic versioning
+    - uses: actions/checkout@v3
     - run: |
         if [${{ github.event.inputs.version }} == "major"]
         then
