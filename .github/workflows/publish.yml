@@ -25,11 +25,11 @@ jobs:
               echo "Mode: $mode"
               if   [$mode == "major"]
               then
-                yarn version --major
+
               elif [$mode == "minor"]
               then
-                yarn version --minor
+
               else
-                yarn version --patch
+
               fi
               echo yarn version --non-interactive | grep "Current version:" | awk '{ print $4 }
