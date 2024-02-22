@@ -1,4 +1,4 @@
-name: Manual trigger
+name: Publish
 
 on:
   workflow_dispatch:
@@ -18,5 +18,6 @@ jobs:
         runs-on: ubuntu-latest
 
         steps:
-        - name: print mode
-            run: echo "Mode: ${{ github.event.inputs.mode }}"
+          - name: print mode
+            run: |
+              echo "Mode: ${{ github.event.inputs.mode }}"
