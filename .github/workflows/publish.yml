@@ -22,4 +22,5 @@ jobs:
           - name: print mode
             run: |
               mode=${{ github.event.inputs.mode }}
+              
               echo yarn version --non-interactive
