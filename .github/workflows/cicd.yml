@@ -1,8 +1,11 @@
-name: CICD
+name: Build
 
 on:
   push:
-    branches: [ "main" ]
+    branches:
+      - main
+    tags: 
+      - '[0-9].[0-9].[0-9]'
 
 jobs:
 
@@ -40,3 +43,26 @@ jobs:
         run: |
           tool4d.app/Contents/MacOS/tool4d ./compiler/Project/compiler.4DProject --startup-method=build --user-param=$PWD/application/Settings/buildApp.4DSettings,$PWD/application/Project/application.4DProject --dataless
           
+  release:
+    needs: compile
+    runs-on: [self-hosted]
+
+    steps:
+      - name: create release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          draft: false
+          prerelease: false
+      - name: upload release assets
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }} 
+          asset_path: ./package.json
+          asset_name: package.json
+          asset_content_type: application/json
