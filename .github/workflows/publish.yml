@@ -19,23 +19,21 @@ jobs:
 
         steps:
           - uses: actions/checkout@v3
-          - name: print mode
-            run: |
-              mode=${{ github.event.inputs.mode }}
-              version=`cat package.json | jq -r '.version'`
-          - name: bump if major
+          - name: major
             if: ${{ github.event.inputs.mode == 'major' }} 
             run: |
               yarn version --major
-          - name: bump if minor
+          - name: minor
             if: ${{ github.event.inputs.mode == 'minor' }} 
             run: |
               yarn version --minor              
-          - name: bump if patch
+          - name: patch
             if: ${{ github.event.inputs.mode == 'patch' }} 
             run: |
               yarn version --minor    
-          - name: print version   
+          - name: print current version   
             run: |
+              mode=${{ github.event.inputs.mode }}
+              version=`cat package.json | jq -r '.version'`
               echo "version:$version"
               echo "mode:$mode"
