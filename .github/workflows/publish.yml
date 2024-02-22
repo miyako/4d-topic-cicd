@@ -1,1 +1,30 @@
+name: publish
 
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        type: choice
+        description: semantic versioning
+        options: 
+        - major
+        - minor 
+        - patch
+        required: true
+
+jobs:
+
+  publish:
+    runs-on: [self-hosted]
+
+    steps:
+    - name: bump semantic versioning
+    - run: |
+        if [${{ github.event.inputs.version }} == "major"]
+        then
+          yarn version major
+        elif [${{ github.event.inputs.version }} == "minor"]
+          yarn version minor
+        else
+          yarn version patch
+        fi
