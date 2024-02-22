@@ -24,9 +24,9 @@ jobs:
               mode=${{ github.event.inputs.mode }}
               version=`cat package.json | jq -r '.version'`
 
-              if   $mode == "major";then
+              if   [$mode -eq "major"];then
                 echo "major!"
-              elif $mode == "minor";then
+              elif [$mode -eq "minor"];then
                 echo "minor!"
               else
                 echo "patch!"
