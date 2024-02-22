@@ -22,7 +22,6 @@ jobs:
           - name: print mode
             run: |
               export mode=${{ github.event.inputs.mode }}
-              echo "Mode: $mode"
               
               if   [$mode == "major"]
               then
