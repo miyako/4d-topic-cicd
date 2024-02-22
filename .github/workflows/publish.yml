@@ -14,11 +14,11 @@ on:
         
 jobs:
 
-    hello:
+    bump:
         runs-on: macos-latest
 
         steps:
-          - uses: actions/checkout@v3
+          - uses: actions/checkout@v4
           - name: major
             if: ${{ github.event.inputs.mode == 'major' }} 
             run: |
@@ -31,9 +31,11 @@ jobs:
             if: ${{ github.event.inputs.mode == 'patch' }} 
             run: |
               yarn version --minor    
-          - name: print current version   
+          - name: cummit and push  
             run: |
               mode=${{ github.event.inputs.mode }}
               version=`cat package.json | jq -r '.version'`
-              echo "version:$version"
-              echo "mode:$mode"
+              git config user.name github-actions
+              git config user.email action@github.com
+              git commit -m "bump version to $version"
+              git push
