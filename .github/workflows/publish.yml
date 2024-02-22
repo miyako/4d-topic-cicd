@@ -1,4 +1,4 @@
-name: Publish
+name: Manual trigger
 
 on:
   workflow_dispatch:
@@ -11,3 +11,12 @@ on:
         - minor 
         - major
         required: true
+        
+jobs:
+
+    hello:
+        runs-on: ubuntu-latest
+
+        steps:
+        - name: print mode
+            run: echo "Mode: ${{ github.event.inputs.mode }}"
