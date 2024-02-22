@@ -26,7 +26,7 @@ jobs:
                 yarn version major
               elif [${{ github.event.inputs.version }} == "minor"]
                 yarn version minor
-              else
-              yarn version patch
+              elif [${{ github.event.inputs.version }} == "patch"]
+                yarn version patch
               fi
               echo yarn version --non-interactive | grep "Current version:" | awk '{ print $4 }
