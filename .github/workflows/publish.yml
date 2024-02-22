@@ -1,4 +1,4 @@
-name: "publish"
+name: Publish
 
 on:
   workflow_dispatch:
@@ -19,13 +19,5 @@ jobs:
 
     steps:
     - name: bump semantic versioning
-    - uses: actions/checkout@v3
     - run: |
-        if [${{ github.event.inputs.version }} == "major"]
-        then
-          yarn version major
-        elif [${{ github.event.inputs.version }} == "minor"]
-          yarn version minor
-        else
-          yarn version patch
-        fi
+        echo "::mode::${{ github.event.inputs.version }}"
