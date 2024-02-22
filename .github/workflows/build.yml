@@ -16,7 +16,7 @@ jobs:
       - uses: actions/checkout@v4
       - name: download latest tool4d
         run: |        
-          curl https://resources-download.4d.com/release/20.x/20.2/100050/mac/tool4d_v20.2_mac_arm.tar.xz -o tool4d.tar.xz -sL
+          curl https://resources-download.4d.com/release/20%20Rx/20%20R3/100050/mac/tool4d_v20.2_mac_arm.tar.xz -o tool4d.tar.xz -sL
           tar xvJf tool4d.tar.xz
       - name: run unit tests
         run: |
