@@ -11,3 +11,4 @@
 
 * [Workflow syntax for GitHub Actions](https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idif)
 * [Automatic token authentication](https://docs.github.com/en/actions/security-guides/automatic-token-authentication)
+* [Contexts](https://docs.github.com/en/actions/learn-github-actions/contexts)
