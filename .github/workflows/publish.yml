@@ -11,13 +11,3 @@ on:
         - minor 
         - major
         required: true
-
-jobs:
-
-  publish:
-    runs-on: [self-hosted]
-
-    steps:
-    - name: bump semantic versioning
-    - run: |
-        echo "::mode::${{ github.event.inputs.version }}"
