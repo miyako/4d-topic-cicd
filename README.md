@@ -9,4 +9,5 @@
 
 * [A Tool for 4D Code Execution in CLI](https://blog.4d.com/a-tool-for-4d-code-execution-in-cli/)
 
+* [Workflow syntax for GitHub Actions](https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idif)
 * [Automatic token authentication](https://docs.github.com/en/actions/security-guides/automatic-token-authentication)
