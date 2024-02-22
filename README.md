@@ -8,3 +8,5 @@
 * [セルフホストランナーアプリケーションをサービスとして設定する](https://docs.github.com/ja/actions/hosting-your-own-runners/managing-self-hosted-runners/configuring-the-self-hosted-runner-application-as-a-service)
 
 * [A Tool for 4D Code Execution in CLI](https://blog.4d.com/a-tool-for-4d-code-execution-in-cli/)
+
+* [Automatic token authentication](https://docs.github.com/en/actions/security-guides/automatic-token-authentication)
