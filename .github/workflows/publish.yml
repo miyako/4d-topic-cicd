@@ -22,4 +22,4 @@ jobs:
           - name: print mode
             run: |
               mode=${{ github.event.inputs.mode }}
-              echo yarn version --non-interactive | grep "Current version:" | awk '{ print $4 }
+              echo yarn version --non-interactive
