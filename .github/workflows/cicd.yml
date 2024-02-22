@@ -10,7 +10,7 @@ jobs:
     runs-on: [self-hosted]
   
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: download latest tool4d
         run: |        
           curl https://resources-download.4d.com/release/20.x/20.2/latest/mac/tool4d_v20.2_mac_arm.tar.xz -o tool4d.tar.xz -sL
