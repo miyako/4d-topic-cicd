@@ -21,3 +21,12 @@ jobs:
           - name: print mode
             run: |
               echo "Mode: ${{ github.event.inputs.mode }}"
+              if [${{ github.event.inputs.version }} == "major"]
+              then
+                yarn version major
+              elif [${{ github.event.inputs.version }} == "minor"]
+                yarn version minor
+              else
+              yarn version patch
+              fi
+              echo yarn version --non-interactive | grep "Current version:" | awk '{ print $4 }
