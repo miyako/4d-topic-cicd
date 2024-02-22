@@ -31,12 +31,7 @@ jobs:
             if: ${{ github.event.inputs.mode == 'patch' }} 
             run: |
               yarn version --minor
-
-    commit:
-        runs-on: macos-latest
-
-        steps:
-          - name: commit  
+          - name: commit 
             run: |
               mode=${{ github.event.inputs.mode }}
               version=`cat package.json | jq -r '.version'`
