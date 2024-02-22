@@ -21,12 +21,12 @@ jobs:
           - uses: actions/checkout@v3
           - name: print mode
             run: |
-              version = "`${{ github.event.inputs.version }}`"
-              echo "Mode: $version"
-              if   [$version == "major"]
+              mode = ${{ github.event.inputs.mode }}
+              echo "Mode: $mode"
+              if   [$mode == "major"]
               then
                 yarn version major
-              elif [$version == "minor"]
+              elif [$mode == "minor"]
               then
                 yarn version minor
               else
