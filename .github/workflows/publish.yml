@@ -33,7 +33,6 @@ jobs:
               yarn version --minor
 
     commit:
-        needs: bump
         runs-on: macos-latest
 
         steps:
