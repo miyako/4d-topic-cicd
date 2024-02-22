@@ -1,0 +1,13 @@
+{
+	"BuildApp": {
+		"forms": [
+			"BuildApp"
+		],
+		"classes": [
+			"_BuildAppUI",
+			"_Terminal",
+			"BuildApp"
+		]
+	},
+	"trash": {}
+}

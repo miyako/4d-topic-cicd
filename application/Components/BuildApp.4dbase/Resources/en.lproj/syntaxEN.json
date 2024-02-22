@@ -1,0 +1,419 @@
+{
+	"_method_": {},
+	"cs.BuildApp": {
+		"_Terminal": {
+			"new()": {
+				"Syntax": "**.new**()",
+				"Params": [],
+				"Summary": ""
+			}
+		},
+		"_BuildAppUI": {
+			"new()": {
+				"Syntax": "**.new**( *buildApp* : cs.BuildApp.BuildApp; *compileProject* : 4D.File )",
+				"Params": [
+					[
+						"buildApp",
+						"cs.BuildApp.BuildApp",
+						"->"
+					],
+					[
+						"compileProject",
+						"4D.File",
+						"->"
+					]
+				],
+				"Summary": ""
+			}
+		},
+		"BuildApp": {
+			"new()": {
+				"Syntax": "**.new**( *settingsFile* : 4D.File )",
+				"Params": [
+					[
+						"settingsFile",
+						"4D.File",
+						"->"
+					]
+				],
+				"Summary": ""
+			}
+		}
+	},
+	"_Terminal": {
+		"launch()": {
+			"Syntax": "**.launch**( *buildProject* : 4D.File; *compileProject* : 4D.File )",
+			"Params": [
+				[
+					"buildProject",
+					"4D.File",
+					"->"
+				],
+				[
+					"compileProject",
+					"4D.File",
+					"->"
+				]
+			],
+			"Summary": ""
+		},
+		"onResponse()": {
+			"Syntax": "**.onResponse**( *request* : 4D.HTTPRequest; *event* : Object )",
+			"Params": [
+				[
+					"request",
+					"4D.HTTPRequest",
+					"->"
+				],
+				[
+					"event",
+					"Object",
+					"->"
+				]
+			],
+			"Summary": ""
+		},
+		"onError()": {
+			"Syntax": "**.onError**( *request* : 4D.HTTPRequest; *event* : Object )",
+			"Params": [
+				[
+					"request",
+					"4D.HTTPRequest",
+					"->"
+				],
+				[
+					"event",
+					"Object",
+					"->"
+				]
+			],
+			"Summary": ""
+		},
+		"quote()": {
+			"Syntax": "**.quote**( *in* : Text )->out : Text",
+			"Params": [
+				[
+					"in",
+					"Text",
+					"->"
+				],
+				[
+					"out",
+					"Text",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"escape()": {
+			"Syntax": "**.escape**( *in* : Text )->out : Text",
+			"Params": [
+				[
+					"in",
+					"Text",
+					"->"
+				],
+				[
+					"out",
+					"Text",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"compiler": {
+			"Syntax": "compiler : 4D.Folder"
+		},
+		"tool4d": {
+			"Syntax": "tool4d : 4D.File"
+		}
+	},
+	"_BuildAppUI": {
+		"updatePluginsList()": {
+			"Syntax": "**.updatePluginsList**( *item* : Object )->icon : Picture",
+			"Params": [
+				[
+					"item",
+					"Object",
+					"->"
+				],
+				[
+					"icon",
+					"Picture",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"showOnDisk()": {
+			"Syntax": "**.showOnDisk**( *name* : Text; *suffix* : Text )->icon : Picture",
+			"Params": [
+				[
+					"name",
+					"Text",
+					"->"
+				],
+				[
+					"suffix",
+					"Text",
+					"->"
+				],
+				[
+					"icon",
+					"Picture",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"updateIconPath()": {
+			"Syntax": "**.updateIconPath**( *name* : Text )->icon : Picture",
+			"Params": [
+				[
+					"name",
+					"Text",
+					"->"
+				],
+				[
+					"icon",
+					"Picture",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"updateDestinationPath()": {
+			"Syntax": "**.updateDestinationPath**( *name* : Text )->icon : Picture",
+			"Params": [
+				[
+					"name",
+					"Text",
+					"->"
+				],
+				[
+					"icon",
+					"Picture",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"updateComponentsList()": {
+			"Syntax": "**.updateComponentsList**( *item* : Object )->icon : Picture",
+			"Params": [
+				[
+					"item",
+					"Object",
+					"->"
+				],
+				[
+					"icon",
+					"Picture",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"updateModulesList()": {
+			"Syntax": "**.updateModulesList**( *item* : Object )->icon : Picture",
+			"Params": [
+				[
+					"item",
+					"Object",
+					"->"
+				],
+				[
+					"icon",
+					"Picture",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"updateApplicationPath()": {
+			"Syntax": "**.updateApplicationPath**( *name* : Text )->icon : Picture",
+			"Params": [
+				[
+					"name",
+					"Text",
+					"->"
+				],
+				[
+					"icon",
+					"Picture",
+					"<-"
+				]
+			],
+			"Summary": ""
+		}
+	},
+	"BuildApp": {
+		"parseFile()": {
+			"Syntax": "**.parseFile**( *settingsFile* : 4D.File )->BuildApp : cs.BuildApp.BuildApp",
+			"Params": [
+				[
+					"settingsFile",
+					"4D.File",
+					"->"
+				],
+				[
+					"BuildApp",
+					"cs.BuildApp.BuildApp",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"toString()": {
+			"Syntax": "**.toString**()->XML : Text",
+			"Params": [
+				[
+					"XML",
+					"Text",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"toObject()": {
+			"Syntax": "**.toObject**()->JSON : Text",
+			"Params": [
+				[
+					"JSON",
+					"Text",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"loadFromHost()": {
+			"Syntax": "**.loadFromHost**() : cs.BuildApp.BuildApp",
+			"Params": [
+				[
+					"",
+					"cs.BuildApp.BuildApp",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"findPluginsFolder()": {
+			"Syntax": "**.findPluginsFolder**( *compileProject* : 4D.File )->plugins : 4D.Folder",
+			"Params": [
+				[
+					"compileProject",
+					"4D.File",
+					"->"
+				],
+				[
+					"plugins",
+					"4D.Folder",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"editor()": {
+			"Syntax": "**.editor**( *compileProject* : 4D.File )",
+			"Params": [
+				[
+					"compileProject",
+					"4D.File",
+					"->"
+				]
+			],
+			"Summary": ""
+		},
+		"findPlugins()": {
+			"Syntax": "**.findPlugins**( *compileProject* : 4D.File )->plugins : Collection",
+			"Params": [
+				[
+					"compileProject",
+					"4D.File",
+					"->"
+				],
+				[
+					"plugins",
+					"Collection",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"toFile()": {
+			"Syntax": "**.toFile**( *file* : 4D.File ) : cs.BuildApp.BuildApp",
+			"Params": [
+				[
+					"file",
+					"4D.File",
+					"->"
+				],
+				[
+					"",
+					"cs.BuildApp.BuildApp",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"findCertificates()": {
+			"Syntax": "**.findCertificates**() : cs.BuildApp.BuildApp",
+			"Params": [
+				[
+					"",
+					"cs.BuildApp.BuildApp",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"findComponents()": {
+			"Syntax": "**.findComponents**( *compileProject* : 4D.File; *asFiles* : Boolean )->components : Collection",
+			"Params": [
+				[
+					"compileProject",
+					"4D.File",
+					"->"
+				],
+				[
+					"asFiles",
+					"Boolean",
+					"->"
+				],
+				[
+					"components",
+					"Collection",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"findLicenses()": {
+			"Syntax": "**.findLicenses**( *licenseTypes* : Collection ) : cs.BuildApp.BuildApp",
+			"Params": [
+				[
+					"licenseTypes",
+					"Collection",
+					"->"
+				],
+				[
+					"",
+					"cs.BuildApp.BuildApp",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"get settings()": {
+			"Syntax": "**.get settings**()->settings : Object",
+			"Params": [
+				[
+					"settings",
+					"Object",
+					"<-"
+				]
+			],
+			"Summary": ""
+		}
+	}
+}
