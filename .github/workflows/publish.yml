@@ -22,7 +22,8 @@ jobs:
           - name: print mode
             run: |
               mode=${{ github.event.inputs.mode }}
-              
+
+              /*
               if   [$mode == "major"]
               then
                 echo "major!"
@@ -32,4 +33,5 @@ jobs:
               else
                 echo "patch!"
               fi
+              */
               echo yarn version --non-interactive | grep "Current version:" | awk '{ print $4 }
