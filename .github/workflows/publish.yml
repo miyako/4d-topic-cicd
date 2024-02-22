@@ -22,5 +22,6 @@ jobs:
           - name: print mode
             run: |
               mode=${{ github.event.inputs.mode }}
-              
-              echo yarn version --non-interactive
+              version=`cat package.json | jq -r '.version'`
+              echo "version:$version"
+              echo "mode:$mode"
