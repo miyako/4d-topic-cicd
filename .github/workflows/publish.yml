@@ -36,5 +36,6 @@ jobs:
             run: |
               yarn version --minor    
           - name: print version   
+            run: |
               echo "version:$version"
               echo "mode:$mode"
