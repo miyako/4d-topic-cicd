@@ -23,13 +23,14 @@ jobs:
             run: |
               mode="${{ github.event.inputs.mode }}"
               echo "Mode: $mode"
+              
               if   [$mode == "major"]
               then
-
+                echo "major!"
               elif [$mode == "minor"]
               then
-
+                echo "minor!"
               else
-
+                echo "patch!"
               fi
               echo yarn version --non-interactive | grep "Current version:" | awk '{ print $4 }
