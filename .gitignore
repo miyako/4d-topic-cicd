@@ -5,4 +5,4 @@ actions-runner
 application/Libraries/lib4d-arm64.dylib
 application/UTestResult.txt
 application/Components/*
-application/Settings/*
+application/Settings/backup.4DSettings
