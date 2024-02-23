@@ -9,7 +9,7 @@ jobs:
     runs-on: [macos-latest]
     steps:
       - name: get
-        uses: miyako/4D/actions/get-tool@v1
+        uses: miyako/4D/.github/actions/get-tool@v1
         with:
           platform: macos
           branch: 20.x
