@@ -8,6 +8,8 @@ on:
   workflow_dispatch: 
 
 env: 
+
+  TOOL4D_URL: https://resources-download.4d.com/release/
   TOOL4D_BRANCH: 20.x
   TOOL4D_VERSION: 20.2
   TOOL4D_BUILD: latest 
@@ -43,7 +45,7 @@ jobs:
           curl ${CURL_DOWNLOAD_URL} -o tool4d.tar.xz -sL
           tar xvJf tool4d.tar.xz
         env: 
-          CURL_DOWNLOAD_URL: ${{ "https://resources-download.4d.com/release/" + env.TOOL4D_BRANCH + "/" + env.TOOL4D_VERSION + "/" + env.TOOL4D_BUILD + "/" + env.TOOL4D_PLATFORM + "/tool4d_v" + env.TOOL4D_VERSION + "_" + env.TOOL4D_PLATFORM + "_" + env.TOOL4D_SUFFIX + ".tar.xz" }}
+          CURL_DOWNLOAD_URL: ${{ env.TOOL4D_URL + env.TOOL4D_BRANCH + "/" + env.TOOL4D_VERSION + "/" + env.TOOL4D_BUILD + "/" + env.TOOL4D_PLATFORM + "/tool4d_v" + env.TOOL4D_VERSION + "_" + env.TOOL4D_PLATFORM + "_" + env.TOOL4D_SUFFIX + ".tar.xz" }}
           
 # end of generic code
 # customise the fail condition here
