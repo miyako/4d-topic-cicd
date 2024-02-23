@@ -17,7 +17,7 @@ This workflow does the following
 4. download [`tool4d`](https://developer.4d.com/docs/Admin/cli/#using-tool4d)
 5. run a specific [`--startup-method`](https://developer.4d.com/docs/Admin/cli/#launch-a-4d-application) with `tool4d` and `compiler` project 
 
-Only changes relevant to code execution is monitored:
+Only changes relevant to code execution will trigger the workflow:
 
 ```yml
 on:
@@ -28,6 +28,62 @@ on:
       - '*/Project/Sources/**/*.4dm'
       - '*/Project/Sources/*/*.4DForm'
       - '*/Project/Sources/*.4DCatalog' 
+```
+
+A specific branch, product and build of `tool4d` is used:
+
+```yml
+jobs:     
+
+  get:
+    strategy:
+      fail-fast: false
+      matrix:
+        TOOL4D_PLATFORM: ["windows-latest", "macos-latest"]
+        TOOL4D_BRANCH: [20.x]
+        TOOL4D_VERSION: [20.2]
+        TOOL4D_BUILD: [latest] 
+    runs-on: ${{ matrix.TOOL4D_PLATFORM }}
+    steps:
+
+      - name: checkout 
+        uses: actions/checkout@v4
+    
+      - name: get tool4d
+        id: get
+        uses: miyako/4D/.github/actions/get-tool@v1
+        with:
+          platform: ${{ matrix.TOOL4D_PLATFORM }}
+          branch: ${{ matrix.TOOL4D_BRANCH }}
+          version: ${{ matrix.TOOL4D_VERSION }}
+          build: ${{ matrix.TOOL4D_BUILD }}
+```
+
+Any combination of runners, `tool4d`, projects, `--startup-method` can be specified in a strategy matrix:
+
+```yml
+jobs:     
+
+  get:
+    strategy:
+      fail-fast: false
+      matrix:
+        TOOL4D_PLATFORM: ["windows-latest", "macos-latest"]
+        TOOL4D_BRANCH: [20.x]
+        TOOL4D_VERSION: [20.2]
+        TOOL4D_BUILD: [test] 
+        TOOL4D_STARTUP_METHOD: [latest] 
+        TOOL4D_STARTUP_PROJECT_PATH: [./application/Project/application.4DProject] 
+    runs-on: ${{ matrix.TOOL4D_PLATFORM }}
+    steps:
+
+      - name: run tests
+        uses: ./.github/actions/run-tests
+        with:
+          tool4d_download_url: ${{ steps.get.outputs.tool4d_download_url }}
+          tool4d_executable_path: ${{ steps.get.outputs.tool4d_executable_path }}
+          startup_method: ${{ matrix.TOOL4D_STARTUP_METHOD }}
+          project_path: ${{ matrix.TOOL4D_STARTUP_PROJECT_PATH }}        
 ```
 
 
