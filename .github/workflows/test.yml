@@ -10,12 +10,14 @@ on:
 env: 
 
   TOOL4D_URL: https://resources-download.4d.com/release/
-  TOOL4D_NAME: ""
+  TOOL4D_PLATFORM: ""
   TOOL4D_BRANCH: 20.x
   TOOL4D_VERSION: 20.2
   TOOL4D_BUILD: latest 
   TOOL4D_SUFFIX: ""
+  TOOL4D_NAME: ""
   TOOL4D_EXECUTABLE_PATH: ""
+  CURL_DOWNLOAD_URL: ""
   PROJECT_STARTUP_METHOD: test
   PROJECT_PATH: ./application/Project/application.4DProject
   
@@ -29,13 +31,13 @@ jobs:
       - name: platform windows
         if: ${{ matrix.os == 'windows-latest' }}
         run: |
-          echo "TOOL4D_NAME=win" >> $GITHUB_ENV
+          echo "TOOL4D_PLATFORM=win" >> $GITHUB_ENV
           echo "TOOL4D_SUFFIX=" >> $GITHUB_ENV
           echo "TOOL4D_EXECUTABLE_PATH=tool4d/tool4d.exe" >> $GITHUB_ENV  
       - name: platform macos    
         if: ${{ matrix.os == 'macos-latest' }}
         run: |
-          echo "TOOL4D_NAME=mac" >> $GITHUB_ENV
+          echo "TOOL4D_PLATFORM=mac" >> $GITHUB_ENV
           echo "TOOL4D_SUFFIX=_arm" >> $GITHUB_ENV  
           echo "TOOL4D_EXECUTABLE_PATH=tool4d.app/Contents/MacOS/tool4d" >> $GITHUB_ENV  
       - name: checkout repository
