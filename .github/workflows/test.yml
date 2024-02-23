@@ -52,7 +52,7 @@ jobs:
           chcp 65001 #set code page to utf-8
           echo ("TOOL4D_PLATFORM=win") >> $env:GITHUB_ENV
           echo ("TOOL4D_SUFFIX=") >> $env:GITHUB_ENV
-          echo ("TOOL4D_EXECUTABLE_PATH=") >> $env:GITHUB_ENV
+          echo ("TOOL4D_EXECUTABLE_PATH=too4d/too4d.exe") >> $env:GITHUB_ENV
           
       - name: setup windows
         if: ${{ env.platform == 'windows' }}
@@ -87,7 +87,7 @@ jobs:
 # customise the fail condition here
 # in the example below, we test the result log file
 
-      - name: unit tests macos
+      - name: unit tests
         if: ${{ env.platform }}
         run: |
           ${TOOL4D_EXECUTABLE_PATH} ${PROJECT_PATH} --startup-method=${PROJECT_STARTUP_METHOD} --dataless
