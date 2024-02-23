@@ -14,3 +14,4 @@
 * [Contexts](https://docs.github.com/en/actions/learn-github-actions/contexts)
 * [Variables](https://docs.github.com/en/actions/learn-github-actions/variables)
 * [Expressions](https://docs.github.com/en/actions/learn-github-actions/expressions)
+* [Workflow commands for GitHub Actions](https://docs.github.com/en/actions/using-workflows/workflow-commands-for-github-actions#environment-files)
