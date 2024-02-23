@@ -40,17 +40,24 @@ env:
   
 jobs:
 
-  get: 
-    strategy:
-      matrix:
-        os: [windows-latest, macos-latest]
-    uses: miyako/4D/.github/workflows/get-tool.yml@v1
-    with:
-      platform: ${{ matrix.os }}
-      labels: ${{ matrix.os }}
-      branch: 20.x
-      version: 20.2
-      build: latest
+  what:
+    runs-on: macos-latest
+    steps:
+      - name: test
+          run echo "${OS}" 
+          env:
+            OS: ${{ env.TOOL4D_BRANCH }}
+  # get: 
+  #   strategy:
+  #     matrix:
+  #       os: [windows-latest, macos-latest]
+  #   uses: miyako/4D/.github/workflows/get-tool.yml@v1
+  #   with:
+  #     platform: ${{ matrix.os }}
+  #     labels: ${{ matrix.os }}
+  #     branch: 20.x
+  #     version: 20.2
+  #     build: latest
       
   checkout:
     needs: get
