@@ -47,12 +47,6 @@ jobs:
       - name: compile project
         run: |
           tool4d.app/Contents/MacOS/tool4d ./compiler/Project/compiler.4DProject --startup-method=localbuild --user-param=$PWD/application/Settings/buildApp.4DSettings,$PWD/application/Project/application.4DProject --dataless
-  
-  archive:
-    needs: test
-    runs-on: [self-hosted]
-    
-    steps:
       - name: check context
         if: ${{ github.event_name == 'workflow_run' && github.event.workflow && github.event.workflow.name == 'Publish' }}
         run: |
