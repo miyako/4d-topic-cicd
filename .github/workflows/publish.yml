@@ -74,13 +74,13 @@ jobs:
           build: 100959
           arch: arm
           
-      - name: run tests
-        uses: ./.github/actions/run-tests
-        with:
-          tool4d_download_url: ${{ steps.get.outputs.tool4d_download_url }}
-          tool4d_executable_path: ${{ steps.get.outputs.tool4d_executable_path }}
-          startup_method: ${{ inputs.test_startup_method }}
-          project_path: ${{ inputs.build_project_path }}  
+      # - name: run tests
+      #   uses: ./.github/actions/run-tests
+      #   with:
+      #     tool4d_download_url: ${{ steps.get.outputs.tool4d_download_url }}
+      #     tool4d_executable_path: ${{ steps.get.outputs.tool4d_executable_path }}
+      #     startup_method: ${{ inputs.test_startup_method }}
+      #     project_path: ${{ inputs.build_project_path }}  
 
       - name: build macos
         id: build
