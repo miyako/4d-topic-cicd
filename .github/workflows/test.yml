@@ -61,7 +61,7 @@ jobs:
       - name: get tool4d
         id: get
         if: ${{ env.platform }}
-        uses: miyako/get-tool@v1
+        uses: miyako/.github/workflows/get-tool.yml@v1
         with:
           platform: ${{ env.platform }}
           labels: ${{ toJSON(matrix.os) }}
