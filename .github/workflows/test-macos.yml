@@ -8,6 +8,9 @@ jobs:
   get:
     runs-on: [macos, self-hosted]
     steps:
+      - name: checkout 
+        uses: actions/checkout@v4
+        
       - name: get tool4d
         id: get
         uses: miyako/4D/.github/actions/get-tool@v1
@@ -17,10 +20,7 @@ jobs:
           version: 20.2
           build: latest
           arch: arm
-
-      - name: checkout 
-        uses: actions/checkout@v4
-          
+  
       - name: run tests
         uses: ./.github/actions/run-tests
         with:
