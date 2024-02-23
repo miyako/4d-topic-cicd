@@ -15,6 +15,16 @@ on:
         type: boolean
         description: macos-latest
         default: true
+
+  workflow_call:
+    inputs:
+      windows:
+        required: true
+        type: boolean
+      macos:
+        required: true
+        type: boolean
+
 env: 
 
   TOOL4D_URL: https://resources-download.4d.com/release/
