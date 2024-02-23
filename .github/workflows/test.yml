@@ -14,7 +14,7 @@ on:
       macos:
         type: boolean
         description: macos-latest
-        default: false
+        default: true
 env: 
 
   TOOL4D_URL: https://resources-download.4d.com/release/
@@ -87,19 +87,8 @@ jobs:
 # customise the fail condition here
 # in the example below, we test the result log file
 
-      - name: unit tests windows
-        if: ${{ env.platform == 'windows' }}
-        run: |          
-          $env:TOOL4D_EXECUTABLE_PATH $env:PROJECT_PATH --startup-method=$env:PROJECT_STARTUP_METHOD --dataless
-          $env:UTestResult=$(gc application/UTestResult.txt)
-          $env:value=$(gc application/UTestResult.txt | select -first 1)
-          rm application/UTestResult.txt
-          if [ "$env:value" = "Unit tests failed" ]
-          then
-            exit 1
-          fi   
       - name: unit tests macos
-        if: ${{ env.platform == 'macos' }}
+        if: ${{ env.platform }}
         run: |
           ${TOOL4D_EXECUTABLE_PATH} ${PROJECT_PATH} --startup-method=${PROJECT_STARTUP_METHOD} --dataless
           UTestResult=`cat application/UTestResult.txt`
@@ -109,3 +98,4 @@ jobs:
           then
             exit 1
           fi
+        shell: bash
