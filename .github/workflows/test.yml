@@ -14,7 +14,7 @@ on:
       macos:
         type: boolean
         description: macos-latest
-        default: true
+        default: false
 env: 
 
   TOOL4D_URL: https://resources-download.4d.com/release/
@@ -67,11 +67,12 @@ jobs:
         run: |          
           echo "CURL_DOWNLOAD_URL=${TOOL4D_URL}${TOOL4D_BRANCH}/${TOOL4D_VERSION}/${TOOL4D_BUILD}/${TOOL4D_PLATFORM}/tool4d_v${TOOL4D_VERSION}_${TOOL4D_PLATFORM}${TOOL4D_SUFFIX}.tar.xz" >> $GITHUB_ENV
       - name: checkout repository
+        if: ${{ env.platform }}
         uses: actions/checkout@v4
       - name: download tool4d windows
         if: ${{ env.platform == 'windows' }}
         run: |     
-          curl https://resources-download.4d.com/release/20.x/20.2/latest/win/tool4d_v20.2_win.tar.xz
+          curl https://resources-download.4d.com/release/20.x/20.2/latest/win/tool4d_v20.2_win.tar.xz --location
           echo $(ls .)
           tar -xvJf tool4d.tar.xz -C tool4d
       - name: download tool4d macos
