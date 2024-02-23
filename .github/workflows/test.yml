@@ -41,9 +41,12 @@ env:
 jobs:
 
   get:
+    strategy:
+      matrix:
+        os: [windows-latest, macos-latest]
     uses: miyako/4D/.github/workflows/get-tool.yml@v1
     with:
-      platform: ${{ matrix.os }}
+      platform: ${{ toJSON(matrix.os) }}
       labels: ${{ matrix.os }}
       branch: 20.x
       version: 20.2
