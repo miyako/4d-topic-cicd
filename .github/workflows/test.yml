@@ -43,7 +43,7 @@ jobs:
           echo "TOOL4D_PLATFORM=mac" >> $GITHUB_ENV
           echo "TOOL4D_SUFFIX=_arm" >> $GITHUB_ENV  
           echo "TOOL4D_EXECUTABLE_PATH=tool4d.app/Contents/MacOS/tool4d" >> $GITHUB_ENV 
-          echo "TOOL4D_NAME=tool4d_v${TOOL4D_VERSION}_${TOOL4D_PLATFORM}${TOOL4D_SUFFIX}.tar.xz" >> $GITHUB_ENV
+          echo "TOOL4D_NAME=tool4d_v${TOOL4D_VERSION}_$TOOL4D_PLATFORM$TOOL4D_SUFFIX.tar.xz" >> $GITHUB_ENV
           echo "CURL_DOWNLOAD_URL=${TOOL4D_URL}/${TOOL4D_BRANCH}/${TOOL4D_VERSION}/${TOOL4D_BUILD}/${TOOL4D_PLATFORM}/${TOOL4D_NAME}" >> $GITHUB_ENV
       - name: checkout repository
         uses: actions/checkout@v4
