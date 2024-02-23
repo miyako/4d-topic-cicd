@@ -83,13 +83,13 @@ jobs:
           build_settings_path: ${{ inputs.build_settings_path }}
 
       - name: upload product
-        if: ${{ steps.build.deployment }}
+        if: ${{ steps.build.outputs.deployment }}
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          upload_url: ${{ steps.build.upload_url }}
-          asset_path: ${{ steps.build.asset_path }}
-          asset_name: ${{ steps.build.asset_name }}
+          upload_url: ${{ steps.build.outputs.upload_url }}
+          asset_path: ${{ steps.build.outputs.asset_path }}
+          asset_name: ${{ steps.build.outputs.asset_name }}
           asset_content_type: application/octet-stream
             
