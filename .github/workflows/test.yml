@@ -75,8 +75,9 @@ jobs:
       - name: checkout repository
         if: ${{ env.platform }}
         uses: actions/checkout@v4
-        
+
       - name: download tool4d
+        if: ${{ env.platform }}
         run: |          
           curl "${CURL_DOWNLOAD_URL}" -o tool4d.tar.xz -sL
           tar xvJf tool4d.tar.xz
