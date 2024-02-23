@@ -15,6 +15,10 @@ on:
       mode: 
         required: true
         type: string
+
+env: 
+  DEVELOPER_ID: "Developer ID Application: keisuke miyako (Y69CWUC25B)"
+  BUILD_DIR: build        
         
 jobs:
 
@@ -54,14 +58,14 @@ jobs:
       - name: prepare for distribution
         if: ${{ github.event_name == 'workflow_dispatch' && inputs.version != null }}
         run: |
-          DEVELOPER_ID="Developer ID Application: keisuke miyako (Y69CWUC25B)"
-          PRODUCT_PATH=$PWD/build/application.app
-          DMG_PATH=$PWD/build/application.dmg
+          PRODUCT_PATH=$PWD/$BUILD_DIR/application.app
+          DMG_PATH=$PWD/$BUILD_DIR/application.dmg
           codesign --verbose --deep --timestamp --force --sign "$DEVELOPER_ID" --options=runtime $PRODUCT_PATH 
           hdiutil create -format UDBZ -plist -srcfolder $PRODUCT_PATH $DMG_PATH
           xcrun notarytool submit --keychain-profile "notarytool" $DMG_PATH --wait
           xcrun stapler staple $DMG_PATH
       - name: create release
+        id: release
         uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
@@ -69,8 +73,13 @@ jobs:
           tag_name: ${{ inputs.version }}
           release_name: ${{ inputs.version }}
           draft: false
-          prerelease: false          
-      - uses: actions/upload-artifact@v4
+          prerelease: false     
+      - name: upload product
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          name: application
-          path: ./build/*.dmg
+          upload_url: ${{ steps.release.outputs.upload_url }}
+          asset_path: ./${BUILD_DIR}/application.dmg
+          asset_name: application.dmg
+          asset_content_type: application/octet-stream
