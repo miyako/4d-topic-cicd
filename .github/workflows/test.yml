@@ -33,11 +33,11 @@ jobs:
     strategy:
       matrix:
         os: [windows-latest, macos-latest]
-    runs-on: ${{ matrix.os }}
-    env:
-      windows: ${{ (matrix.os == 'windows-latest') && (github.event.inputs.windows == true) }}
-      macos: ${{ (matrix.os == 'macos-latest') && (github.event.inputs.macos == true) }}      
+    runs-on: ${{ matrix.os }}   
     steps:
+      - env:
+          windows: ${{ (matrix.os == 'windows-latest') && (github.event.inputs.windows == true) }}
+          macos: ${{ (matrix.os == 'macos-latest') && (github.event.inputs.macos == true) }}  
       - name: setup windows
         if: ${{ env.windows }}
         run: |
