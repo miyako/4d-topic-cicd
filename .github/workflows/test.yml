@@ -1,4 +1,4 @@
-name: Text
+name: Test
 
 on:
   push:
@@ -19,21 +19,17 @@ env:
 jobs:
 
   test:    
-    runs-on: [windows-latest, macos-latest]
-  
-    strategy: 
-        matrix:
-          os: [windows-latest, macos-latest]
+    runs-on: [windows-latest]
           
     steps:
       - name: platform windows
-        if: ${{ matrix.os == 'windows-latest' }}
+        if: ${{ false || matrix.os == 'windows-latest' }}
         run: |
           echo "TOOL4D_NAME=win" >> $GITHUB_ENV
           echo "TOOL4D_SUFFIX=" >> $GITHUB_ENV
           echo "TOOL4D_EXECUTABLE_PATH=tool4d/tool4d.exe" >> $GITHUB_ENV  
       - name: platform macos    
-        if: ${{ matrix.os == 'macos-latest' }}
+        if: ${{ true || matrix.os == 'macos-latest' }}
         run: |
           echo "TOOL4D_NAME=mac" >> $GITHUB_ENV
           echo "TOOL4D_SUFFIX=_arm" >> $GITHUB_ENV  
