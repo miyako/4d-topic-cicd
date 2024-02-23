@@ -76,6 +76,8 @@ jobs:
           $(curl $env:CURL_DOWNLOAD_URL --location --silent --output tool4d.tar.xz)
           ls .
           tar -xvJf tool4d.tar.xz -C tool4d
+          ls .
+        shell: bash  
       - name: download tool4d macos
         if: ${{ env.platform == 'macos' }}
         run: |          
