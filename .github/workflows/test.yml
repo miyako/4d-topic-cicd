@@ -2,70 +2,30 @@ name: Test
 
 on:
   workflow_call:
-    inputs:
-      platform:
-        required: true
-        type: string
-      labels: 
-        required: true
-        type: string
-      branch: 
-        required: true
-        type: string
-      version: 
-        required: true
-        type: string
-      build: 
-        required: true
-        type: string
-      windows:
-        required: true
-        type: boolean
-      macos:
-        required: true
-        type: boolean  
-
-env: 
-  platform: ${{ (startsWith(inputs.platform, 'windows') && (inputs.windows == true)) || (startsWith(inputs.platform, 'macos') && (inputs.macos == true)) }}
-
+ 
 jobs:     
 
-  setup:
+  get:
+    strategy:
+      matrix:
+        TOOL4D_PLATFORM: ["windows-latest", "macos-latest"]
+        TOOL4D_BRANCH: [20.x]
+        TOOL4D_VERSION: [20.2]
+        TOOL4D_BUILD: [latest] 
+    runs-on: ${{ matrix.TOOL4D_PLATFORM }}
     steps:
-    - name: get tool4d 
-      id: get
-      if: ${{ env.platform }}
-      uses: miyako/4D/.github/workflows/get-tool.yml@v1
-      with:
-        platform: ${{ inputs.platform }}
-        labels: ${{ inputs.labels }} 
-        branch: ${{ inputs.branch }}
-        version: ${{ inputs.version }}
-        build: ${{ inputs.build }}
-      
-    - name: checkout repository
-      if: ${{ env.platform }}
-      uses: actions/checkout@v4
-
-  tests:   
-    needs: setup
-
-# end of generic code
-# customise the fail condition here
-# in the example below, we test the result log file
-
-    - name: unit tests
-      if: ${{ env.platform }}
-      run: |
-        ${TOOL4D_EXECUTABLE_PATH} ${PROJECT_PATH} --startup-method=${PROJECT_STARTUP_METHOD} --dataless
-        UTestResult=`cat application/UTestResult.txt`
-        value=`head -n 1 application/UTestResult.txt`
-        rm application/UTestResult.txt
-        if [ "$value" = "Unit tests failed" ]
-        then
-          exit 1
-        fi
-      shell: bash
-      env:
-        TOOL4D_EXECUTABLE_PATH: ${{ jobs.setup.steps.get.tool4d_executable_path }}
-        CURL_DOWNLOAD_URL: ${{ jobs.setup.steps.get.outputs.tool4d_download_url }}
+      - name: get tool4d
+        id: get
+        uses: miyako/4D/.github/actions/get-tool@v1
+        with:
+          platform: macos
+          branch: 20.x
+          version: 20.2
+          build: latest
+      - name: run tests
+        uses: ./.github/actions/run-tests@v1
+        with:
+          tool4d_download_url: steps.get.outputs.tool4d_download_url
+          tool4d_executable_path: steps.get.outputs.tool4d_download_url
+          startup_method: test
+          project_path: ./application/Project/application.4DProject          
