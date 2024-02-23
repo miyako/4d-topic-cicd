@@ -73,10 +73,10 @@ jobs:
         if: ${{ matrix.os == 'windows-latest' }}
         run: |          
           $env:TOOL4D_EXECUTABLE_PATH $env:PROJECT_PATH --startup-method=$env:PROJECT_STARTUP_METHOD --dataless
-          UTestResult=$(gc application/UTestResult.txt)
-          value=$(gc application/UTestResult.txt | select -first 1)
+          $env:UTestResult=$(gc application/UTestResult.txt)
+          $env:value=$(gc application/UTestResult.txt | select -first 1)
           rm application/UTestResult.txt
-          if [ "$value" = "Unit tests failed" ]
+          if [ "$env:value" = "Unit tests failed" ]
           then
             exit 1
           fi   
