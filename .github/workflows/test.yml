@@ -39,38 +39,25 @@ env:
   PROJECT_PATH: ./application/Project/application.4DProject
   
 jobs:
-  test: 
+  get: 
     strategy:
       matrix:
         os: [windows-latest, macos-latest]
-    runs-on: ${{ matrix.os }}   
+    uses: miyako/4D/.github/workflows/get-tool.yml@v1
+    with:
+      platform: ${{ matrix.os }}
+      labels: ${{ matrix.os }}
+      branch: ${{ env.TOOL4D_BRANCH }}
+      version: ${{ env.TOOL4D_VERSION }}
+      build: ${{ env.TOOL4D_BUILD }}
+      
+  test:
+    strategy:
+      matrix:
+        os: [windows-latest, macos-latest]
+    runs-on: ${{ matrix.os }}     
     steps:
-      - name: check platform windows
-        if: ${{ (startsWith(matrix.os, 'windows')) && (inputs.windows || github.event_name != 'workflow_dispatch') }}
-        run: |
-          chcp 65001 #set code page to utf-8
-          echo ("platform=$env:PLATFORM") >> $env:GITHUB_ENV
-        env:
-          PLATFORM: ${{ matrix.os }}
-      - name: check platform macos
-        if: ${{ (startsWith(matrix.os, 'macos')) && (inputs.macos || github.event_name != 'workflow_dispatch') }}
-        run: |
-          echo "platform=${PLATFORM}" >> $GITHUB_ENV
-        env:
-          PLATFORM: ${{ matrix.os }}
-      - name: get tool4d
-        id: get
-        if: ${{ env.platform }}
-        uses: miyako/4D/.github/workflows/get-tool.yml@v1
-        with:
-          platform: ${{ env.platform }}
-          labels: ${{ toJSON(matrix.os) }}
-          branch: ${{ env.TOOL4D_BRANCH }}
-          version: ${{ env.TOOL4D_VERSION }}
-          build: ${{ env.TOOL4D_BUILD }}
-
       - name: checkout repository
-        if: ${{ env.platform }}
         uses: actions/checkout@v4
         
 # end of generic code
