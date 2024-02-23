@@ -9,13 +9,13 @@ A CI/CD template project.
 
 A [Run Tests](https://github.com/miyako/4d-topic-cicd/blob/main/.github/workflows/run-tests.yml) workflow is automatically triggered when code is changed in the `main` branch. 
 
-This workflow does the following
+This workflow does the following:
 
-1. launch 2 GitHub hosted runners: `windows-latest` `macos-latest`
-2. checkout the current repository
-3. checkout the latest [`compiler`](https://github.com/miyako/4d-class-compiler) project from releases
-4. download [`tool4d`](https://developer.4d.com/docs/Admin/cli/#using-tool4d)
-5. run a specific [`--startup-method`](https://developer.4d.com/docs/Admin/cli/#launch-a-4d-application) with `tool4d` and `compiler` project 
+1. Launch 2 GitHub hosted runners: `windows-latest` `macos-latest`
+2. Checkout the current repository
+3. Checkout the latest [`compiler`](https://github.com/miyako/4d-class-compiler) project from releases
+4. Download [`tool4d`](https://developer.4d.com/docs/Admin/cli/#using-tool4d)
+5. Run a specific [`--startup-method`](https://developer.4d.com/docs/Admin/cli/#launch-a-4d-application) with `tool4d` and `compiler` project 
 
 Sample result: https://github.com/miyako/4d-topic-cicd/actions/runs/8025901243
 
@@ -85,6 +85,22 @@ jobs:
           project_path: ${{ matrix.TOOL4D_STARTUP_PROJECT_PATH }}        
 ```
 
+A [Publish](https://github.com/miyako/4d-topic-cicd/blob/main/.github/workflows/publish.yml) workflow can be trigged manually.
+
+This workflow does the following:
+
+1. Prompt to choose the kind of version bump: `patch`, `minor`, `major`
+2. Update `package.json` at the root of the project (the version information in this file is incorporated in the build process)
+3. Create a release that corresponds to the new version
+4. Connect to a self-hosted runner (build must always take place on a self-hosted runner with licenses installed)
+5. (skip units tests, which would have been done already on GitHub hosted runners, as described above)
+6. Checkout the current repository
+7. Checkout the latest [`compiler`](https://github.com/miyako/4d-class-compiler) project from releases
+8. Download [`tool4d`](https://developer.4d.com/docs/Admin/cli/#using-tool4d)
+9. Build, sign for distribtuion (Develooper ID Application), archive, notarise, staple the product
+10. Uploaded .dmg to the release created earlier
+
+---
 
 # workflows
 
