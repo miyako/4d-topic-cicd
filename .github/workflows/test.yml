@@ -24,34 +24,24 @@ on:
       macos:
         required: true
         type: boolean
-
-env:
-
-  TOOL4D_URL: https://resources-download.4d.com/release/
-  TOOL4D_PLATFORM: ""
-  TOOL4D_BRANCH: 20.x
-  TOOL4D_VERSION: 20.2
-  TOOL4D_BUILD: latest 
-  TOOL4D_SUFFIX: ""
-  TOOL4D_EXECUTABLE_PATH: ""
-  CURL_DOWNLOAD_URL: ""
-  PROJECT_STARTUP_METHOD: test
-  PROJECT_PATH: ./application/Project/application.4DProject       
-      
+             
 jobs:
 
   get:
     strategy:
       matrix:
-        os: [windows-latest, macos-latest]
-        env: ${{ env }}
+        TOOL4D_PLATFORM: [windows-latest, macos-latest]
+        TOOL4D_BRANCH: [20.x, 20.x]
+        TOOL4D_VERSION: [20.2, 20.2]
+        TOOL4D_BUILD: [latest, latest] 
+      # env is unavailable in a strategy
     uses: miyako/4D/.github/workflows/get-tool.yml@v1
     with:
-      platform: ${{ toJSON(matrix.os) }}
-      labels: ${{ toJSON(matrix.os) }}
-      branch: ${{ matrix.env.TOOL4D_BRANCH }}
-      version: ${{ matrix.env.TOOL4D_VERSION }}
-      build: ${{ matrix.env.TOOL4D_BUILD }}
+      platform: ${{ matrix.TOOL4D_PLATFORM }}
+      labels: ${{ matrix.TOOL4D_PLATFORM }}
+      branch: ${{ matrix.TOOL4D_BRANCH }}
+      version: ${{ matrix.TOOL4D_VERSION }}
+      build: ${{ matrix.TOOL4D_BUILD }}
     
   checkout:
     needs: get
