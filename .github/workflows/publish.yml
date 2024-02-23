@@ -83,6 +83,7 @@ jobs:
           project_path: ${{ inputs.build_project_path }}  
 
       - name: build macos
+        id: build
         uses: miyako/4D/.github/actions/build-macos@v1
         with:
           deployment: ${{ github.event_name == 'workflow_dispatch' && needs.bump.outputs.version != null }}
@@ -95,3 +96,15 @@ jobs:
           notarytool_keychain_profile: ${{ inputs.notarytool_keychain_profile }}
           build_project_path: ${{ inputs.build_project_path }}
           build_settings_path: ${{ inputs.build_settings_path }}
+
+      - name: upload product
+        if: ${{ steps.build.deployment }}
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.build.upload_url }}
+          asset_path: ${{ steps.build.asset_path }}
+          asset_name: ${{ steps.build.asset_name }}
+          asset_content_type: application/octet-stream
+            
