@@ -1,4 +1,4 @@
-name: Publish
+name: Bump
 
 on:
   workflow_dispatch:
@@ -41,9 +41,3 @@ jobs:
         - name: get version
           run: |
             VERSION=`cat package.json | jq -r '.version'`
-
-    build:
-      uses: ./.github/workflows/build.yml
-      with:
-        version: ${VERSION}
-        mode: ${{ github.event.inputs.mode }} 
