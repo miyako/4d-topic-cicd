@@ -16,6 +16,15 @@ on:
         description: run tests
         default: true
 
+env: 
+
+  DEVELOPER_ID: "Developer ID Application: keisuke miyako (Y69CWUC25B)"
+  BUILD_DIR: build        
+  PRODUCT_NAME: application   
+  NOTARYTOOL_KEYCHAIN_PROFILE: notarytool
+  BUILD_PROJECT_PATH: application/Project/application.4DProject
+  BUILD_SETTINGS_PATH: application/Settings/buildApp.4DSettings
+  
 jobs:
 
   bump:
@@ -39,3 +48,13 @@ jobs:
       version: ${{ needs.bump.outputs.version }}
       mode: ${{ needs.bump.outputs.mode }}
       upload_url: ${{ needs.release.outputs.upload_url }}
+      
+      # event_name of workflow_call is workflow_dispatch
+      development: ${{ github.event_name == 'workflow_dispatch' && inputs.version != null }}
+
+      developer_id: ${{ env.DEVELOPER_ID }}
+      build_dir: ${{ env.BUILD_DIR }}
+      product_name: ${{ env.PRODUCT_NAME }}
+      notarytool_keychain_profile: ${{ env.NOTARYTOOL_KEYCHAIN_PROFILE }}
+      build_project_path: ${{ env.BUILD_PROJECT_PATH }}
+      build_settings_path: ${{ env.BUILD_SETTINGS_PATH }}
