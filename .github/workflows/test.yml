@@ -45,6 +45,19 @@ jobs:
         os: [windows-latest, macos-latest]
     runs-on: ${{ matrix.os }}   
     steps:
+      - name: check platform windows
+        if: ${{ (startsWith(matrix.os, 'windows')) && (inputs.windows || github.event_name != 'workflow_dispatch') }}
+        run: |
+          chcp 65001 #set code page to utf-8
+          echo ("platform=$env:PLATFORM") >> $env:GITHUB_ENV
+        env:
+          PLATFORM: ${{ matrix.os }}
+      - name: check platform macos
+        if: ${{ (startsWith(matrix.os, 'macos')) && (inputs.macos || github.event_name != 'workflow_dispatch') }}
+        run: |
+          echo "platform=${PLATFORM}" >> $GITHUB_ENV
+        env:
+          PLATFORM: ${{ matrix.os }}
       - name: get tool4d
         id: get
         if: ${{ env.platform }}
