@@ -19,7 +19,7 @@ on:
 jobs:
 
   bump:
-    uses: ./.github/workflows/bump.yml
+    uses: miyako/4D/.github/workflows/bump.yml@v1
     with:
       mode: ${{ github.event.inputs.mode }} 
 
