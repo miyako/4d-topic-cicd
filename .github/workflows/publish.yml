@@ -11,10 +11,6 @@ on:
         - minor 
         - major
         required: true
-      test:
-        type: boolean
-        description: run tests
-        default: true
       developer_id: 
         type: string
         default: "Developer ID Application: keisuke miyako (Y69CWUC25B)"
@@ -71,14 +67,6 @@ jobs:
           build: 100959
           arch: arm
           
-      # - name: run tests
-      #   uses: ./.github/actions/run-tests
-      #   with:
-      #     tool4d_download_url: ${{ steps.get.outputs.tool4d_download_url }}
-      #     tool4d_executable_path: ${{ steps.get.outputs.tool4d_executable_path }}
-      #     startup_method: ${{ inputs.test_startup_method }}
-      #     project_path: ${{ inputs.build_project_path }}  
-
       - name: build macos
         id: build
         uses: miyako/4D/.github/actions/build-macos@v1
