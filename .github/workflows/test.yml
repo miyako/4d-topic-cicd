@@ -31,7 +31,7 @@ jobs:
         if: ${{ matrix.os == 'windows-latest' }}
         run: |
           chcp 65001 #set code page to utf-8
-          echo ("TOOL4D_PLATFORM=x86") >> $env:GITHUB_ENV
+          echo ("TOOL4D_PLATFORM=win") >> $env:GITHUB_ENV
           echo ("TOOL4D_SUFFIX=") >> $env:GITHUB_ENV
           echo ("TOOL4D_EXECUTABLE_PATH=") >> $env:GITHUB_ENV
       - name: setup windows
@@ -43,7 +43,7 @@ jobs:
         if: ${{ matrix.os == 'macos-latest' }}
         run: |
           echo "TOOL4D_PLATFORM=mac" >> $GITHUB_ENV
-          echo "TOOL4D_SUFFIX=_arm" >> $GITHUB_ENV  
+          echo "TOOL4D_SUFFIX=_x86" >> $GITHUB_ENV  
           echo "TOOL4D_EXECUTABLE_PATH=tool4d.app/Contents/MacOS/tool4d" >> $GITHUB_ENV
       - name: setup macos  
         if: ${{ matrix.os == 'macos-latest' }}
