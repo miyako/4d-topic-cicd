@@ -112,7 +112,9 @@ This workflow is also triggered automatically, according to the same filter as `
 8. Download [`tool4d`](https://developer.4d.com/docs/Admin/cli/#using-tool4d)
 9. Build, adhoc sign to run locally
 10. (Do not archive or upload the .app)
-    
+
+Sample result: https://github.com/miyako/4d-topic-cicd/actions/runs/8026309928
+
 ---
 
 # Remarks
