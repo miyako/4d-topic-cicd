@@ -33,6 +33,9 @@ on:
       build_settings_path: 
         type: string
         default: application/Settings/buildApp.4DSettings
+      test_startup_method: 
+        type: string
+        default: test
   
 jobs:
 
@@ -47,20 +50,45 @@ jobs:
     with:
       version: ${{ needs.bump.outputs.version }}
       mode: ${{ needs.bump.outputs.mode }} 
-      
-  build:
-    needs: 
-    - bump
-    - release
-    uses: ./.github/workflows/build-macos.yml
-    with:
-      version: ${{ needs.bump.outputs.version }}
-      mode: ${{ needs.bump.outputs.mode }}
-      upload_url: ${{ needs.release.outputs.upload_url }}
-      # env is not available in this context
-      developer_id: ${{ inputs.developer_id }}
-      build_dir: ${{ inputs.build_dir }}
-      product_name: ${{ inputs.product_name }}
-      notarytool_keychain_profile: ${{ inputs.notarytool_keychain_profile }}
-      build_project_path: ${{ inputs.build_project_path }}
-      build_settings_path: ${{ inputs.build_settings_path }}
+
+  tool4d:
+    runs-on: [macos, self-hosted]
+    steps:
+    
+      - name: checkout 
+        uses: actions/checkout@v4
+        
+      - name: get tool4d
+        id: get
+        uses: miyako/4D/.github/actions/get-tool@v1
+        with:
+          platform: macos
+          branch: 20.x
+          version: 20.2
+          build: latest
+          arch: arm
+          
+      - name: run tests
+        uses: ./.github/actions/run-tests
+        with:
+          tool4d_download_url: ${{ steps.get.outputs.tool4d_download_url }}
+          tool4d_executable_path: ${{ steps.get.outputs.tool4d_executable_path }}
+          startup_method: ${{ input.test_startup_method }}
+          project_path: ${{ input.build_project_path }}  
+  
+  # build:
+  #   needs: 
+  #   - tool4d
+  #   - release
+  #   uses: ./.github/workflows/build-macos.yml 
+  #   with:
+  #     version: ${{ needs.bump.outputs.version }}
+  #     mode: ${{ needs.bump.outputs.mode }}
+  #     upload_url: ${{ needs.release.outputs.upload_url }}
+  #     # env is not available in this context
+  #     developer_id: ${{ inputs.developer_id }}
+  #     build_dir: ${{ inputs.build_dir }}
+  #     product_name: ${{ inputs.product_name }}
+  #     notarytool_keychain_profile: ${{ inputs.notarytool_keychain_profile }}
+  #     build_project_path: ${{ inputs.build_project_path }}
+  #     build_settings_path: ${{ inputs.build_settings_path }}
