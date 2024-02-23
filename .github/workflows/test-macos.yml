@@ -1,4 +1,4 @@
-name: 🌀Test for macOS
+name: 🧪Test for macOS
 
 on:
   workflow_dispatch:
