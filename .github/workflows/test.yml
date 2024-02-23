@@ -56,7 +56,7 @@ jobs:
         shell: cmd
         if: ${{ matrix.os == 'windows-latest' }}
         run: |     
-          curl %CURL_DOWNLOAD_URL% -o tool4d.tar.xz -sL
+          curl https://resources-download.4d.com/release/20.x/20.2/latest/win/tool4d_v20.2_win.tar.xz -o tool4d.tar.xz -sL
           tar xvJf tool4d.tar.xz -C tool4d       
       - name: download tool4d macos
         if: ${{ matrix.os == 'macos-latest' }}
