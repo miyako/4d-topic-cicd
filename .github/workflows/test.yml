@@ -38,45 +38,43 @@ jobs:
       - name: get platform
         if: ${{ (matrix.os == 'windows-latest') && (github.event.inputs.windows == true) }}
         run: |
-          echo "WINDOWS=1" >> $GITHUB_ENV
-          echo "MACOS=0" >> $GITHUB_ENV
+          echo "platform=windows" >> $GITHUB_ENV
       - name: get platform
         if: ${{ (matrix.os == 'macos-latest') && (github.event.inputs.macos == true) }}
         run: |
-          echo "WINDOWS=0" >> $GITHUB_ENV
-          echo "MACOS=1" >> $GITHUB_ENV 
+          echo "platform=macos" >> $GITHUB_ENV
       - name: setup windows
-        if: ${{ env.windows }}
+        if: ${{ env.platform == 'windows' }}
         run: |
           chcp 65001 #set code page to utf-8
           echo ("TOOL4D_PLATFORM=win") >> $env:GITHUB_ENV
           echo ("TOOL4D_SUFFIX=") >> $env:GITHUB_ENV
           echo ("TOOL4D_EXECUTABLE_PATH=") >> $env:GITHUB_ENV
       - name: setup windows
-        if: ${{ env.windows }}
+        if: ${{ env.platform == 'windows' }}
         run: |
           chcp 65001 #set code page to utf-8
           echo ("CURL_DOWNLOAD_URL="+$env:TOOL4D_URL+$env:TOOL4D_BRANCH+"/"+$env:TOOL4D_VERSION+"/"+$env:TOOL4D_BUILD+"/"+$env:TOOL4D_PLATFORM+"/tool4d_v"+$env:TOOL4D_VERSION+"_"+$env:TOOL4D_PLATFORM+$env:TOOL4D_SUFFIX+".tar.xz") >> $env:GITHUB_ENV
       - name: setup macos   
-        if: ${{ env.macos }}
+        if: ${{ env.platform == 'macos' }}
         run: |
           echo "TOOL4D_PLATFORM=mac" >> $GITHUB_ENV
           echo "TOOL4D_SUFFIX=_x86" >> $GITHUB_ENV  
           echo "TOOL4D_EXECUTABLE_PATH=tool4d.app/Contents/MacOS/tool4d" >> $GITHUB_ENV
       - name: setup macos  
-        if: ${{ env.macos }}
+        if: ${{ env.platform == 'macos' }}
         run: |          
           echo "CURL_DOWNLOAD_URL=${TOOL4D_URL}${TOOL4D_BRANCH}/${TOOL4D_VERSION}/${TOOL4D_BUILD}/${TOOL4D_PLATFORM}/tool4d_v${TOOL4D_VERSION}_${TOOL4D_PLATFORM}${TOOL4D_SUFFIX}.tar.xz" >> $GITHUB_ENV
       - name: checkout repository
         uses: actions/checkout@v4
       - name: download tool4d windows
-        if: ${{ env.windows }}
+        if: ${{ env.platform == 'windows' }}
         run: |     
           $('curl '+$env:CURL_DOWNLOAD_URL+' -o '+$env:GITHUB_WORKSPACE+'\tool4d.tar.xz -vL')
           echo $(ls .)
           tar -xvJf tool4d.tar.xz -C tool4d
       - name: download tool4d macos
-        if: ${{ env.macos }}
+        if: ${{ env.platform == 'macos' }}
         run: |          
           curl "${CURL_DOWNLOAD_URL}" -o tool4d.tar.xz -sL
           tar xvJf tool4d.tar.xz
@@ -86,7 +84,7 @@ jobs:
 # in the example below, we test the result log file
 
       - name: unit tests windows
-        if: ${{ matrix.os == 'windows-latest' }}
+        if: ${{ env.platform == 'windows' }}
         run: |          
           $env:TOOL4D_EXECUTABLE_PATH $env:PROJECT_PATH --startup-method=$env:PROJECT_STARTUP_METHOD --dataless
           $env:UTestResult=$(gc application/UTestResult.txt)
@@ -97,7 +95,7 @@ jobs:
             exit 1
           fi   
       - name: unit tests macos
-        if: ${{ matrix.os == 'macos-latest' }}
+        if: ${{ env.platform == 'macos' }}
         run: |
           ${TOOL4D_EXECUTABLE_PATH} ${PROJECT_PATH} --startup-method=${PROJECT_STARTUP_METHOD} --dataless
           UTestResult=`cat application/UTestResult.txt`
