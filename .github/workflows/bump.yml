@@ -1,16 +1,11 @@
 name: Bump
 
 on:
-  workflow_dispatch:
+  workflow_call: 
     inputs:
-      mode:
-        type: choice
-        description: semantic versioning
-        options: 
-        - patch
-        - minor 
-        - major
-        required: true
+      mode: 
+        required: false
+        type: string
         
 jobs:
 
@@ -24,15 +19,15 @@ jobs:
             git config --local user.name "GitHub Action"
             git config --local user.email "action@github.com"          
         - name: major
-          if: ${{ github.event.inputs.mode == 'major' }} 
+          if: ${{ inputs.mode == 'major' }} 
           run: |
             npm version major
         - name: minor
-          if: ${{ github.event.inputs.mode == 'minor' }} 
+          if: ${{ inputs.mode == 'minor' }} 
           run: |
             npm version minor
         - name: patch
-          if: ${{ github.event.inputs.mode == 'patch' }} 
+          if: ${{ inputs.mode == 'patch' }} 
           run: |
             npm version patch
         - name: git push
