@@ -13,10 +13,18 @@ on:
         required: true
 
 jobs:
+
   bump:
     uses: ./.github/workflows/bump.yml
     with:
       mode: ${{ github.event.inputs.mode }} 
+
+  create-release:
+    needs: bump
+    uses: ./.github/workflows/create-release.yml
+    with:
+      version: ${{ needs.bump.outputs.version }}
+      mode: ${{ needs.bump.outputs.mode }} 
       
   build:
     needs: bump
