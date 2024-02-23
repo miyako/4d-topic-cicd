@@ -16,5 +16,4 @@ jobs:
     bump:
       uses: ./.github/workflows/bump.yml
       with:
-        version: ${VERSION}
         mode: ${{ github.event.inputs.mode }} 
