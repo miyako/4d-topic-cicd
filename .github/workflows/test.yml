@@ -27,7 +27,7 @@ on:
              
 jobs:
 
-  get:
+  test:
     strategy:
       matrix:
         TOOL4D_PLATFORM: ["windows-latest", "macos-latest"]
@@ -42,39 +42,4 @@ jobs:
       branch: ${{ matrix.TOOL4D_BRANCH }}
       version: ${{ matrix.TOOL4D_VERSION }}
       build: ${{ matrix.TOOL4D_BUILD }}
-    
-  checkout:
-    needs: get
-    strategy:
-      matrix:
-        os: [windows-latest, macos-latest]
-    runs-on: ${{ matrix.os }}     
-    steps:
-      - name: checkout repository
-        uses: actions/checkout@v4
-        
-# end of generic code
-# customise the fail condition here
-# in the example below, we test the result log file
-   
-  test:
-    needs: checkout
-    strategy:
-      matrix:
-        os: [windows-latest, macos-latest]
-    runs-on: ${{ matrix.os }}     
-    steps:
-    - name: unit tests
-      run: |
-        ${TOOL4D_EXECUTABLE_PATH} ${PROJECT_PATH} --startup-method=${PROJECT_STARTUP_METHOD} --dataless
-        UTestResult=`cat application/UTestResult.txt`
-        value=`head -n 1 application/UTestResult.txt`
-        rm application/UTestResult.txt
-        if [ "$value" = "Unit tests failed" ]
-        then
-          exit 1
-        fi
-      shell: bash
-      env:
-        TOOL4D_EXECUTABLE_PATH: ${{ steps.get.outputs.tool4d_executable_path }}
-        CURL_DOWNLOAD_URL: ${{ steps.get.outputs.tool4d_download_url }}
+      onready: ./github/workflows/test_1.yml
