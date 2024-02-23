@@ -49,9 +49,6 @@ jobs:
       mode: ${{ needs.bump.outputs.mode }}
       upload_url: ${{ needs.release.outputs.upload_url }}
       
-      # event_name of workflow_call is workflow_dispatch
-      development: ${{ github.event_name == 'workflow_dispatch' && inputs.version != null }}
-
       developer_id: ${{ env.DEVELOPER_ID }}
       build_dir: ${{ env.BUILD_DIR }}
       product_name: ${{ env.PRODUCT_NAME }}
