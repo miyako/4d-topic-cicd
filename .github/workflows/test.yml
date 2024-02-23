@@ -37,11 +37,11 @@ jobs:
       if: ${{ env.platform }}
       uses: miyako/4D/.github/workflows/get-tool.yml@v1
       with:
-      platform: ${{ inputs.platform }}
-      labels: ${{ inputs.labels }} 
-      branch: ${{ inputs.branch }}
-      version: ${{ inputs.version }}
-      build: ${{ inputs.build }}
+        platform: ${{ inputs.platform }}
+        labels: ${{ inputs.labels }} 
+        branch: ${{ inputs.branch }}
+        version: ${{ inputs.version }}
+        build: ${{ inputs.build }}
       
     - name: checkout repository
       if: ${{ env.platform }}
