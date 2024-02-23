@@ -47,6 +47,7 @@ jobs:
       build: 100959
           
   build:
+    needs: get-tool
     uses: miyako/4D/.github/workflows/build-macos.yml@v1
     with:
       development: ${{ github.event_name == 'workflow_dispatch' && inputs.version != null }}
