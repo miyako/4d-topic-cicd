@@ -115,14 +115,15 @@ This workflow is also triggered automatically, according to the same filter as `
     
 ---
 
-### 資料
+# Remarks
 
-* [セルフホステッド ランナーの概要](https://docs.github.com/ja/actions/hosting-your-own-runners/managing-self-hosted-runners/about-self-hosted-runners)
-* [セルフホステッド ランナーを追加する](https://docs.github.com/ja/actions/hosting-your-own-runners/managing-self-hosted-runners/adding-self-hosted-runners)
-* [セルフホストランナーアプリケーションをサービスとして設定する](https://docs.github.com/ja/actions/hosting-your-own-runners/managing-self-hosted-runners/configuring-the-self-hosted-runner-application-as-a-service?platform=mac)
+Although one can [configure the self-hosted runner application as a service](https://docs.github.com/en/actions/hosting-your-own-runners/managing-self-hosted-runners/configuring-the-self-hosted-runner-application-as-a-service?platform=mac), the code codesiging script seems to fail when executed in a background process (maybe there is a workaround, don't know). For the purpose of building 4D applications, it seems better to `./ron.sh` the runner in a Terminal window, manually, or as a login item.
 
+# References
+
+* [About self-hosted runners](https://docs.github.com/en/actions/hosting-your-own-runners/managing-self-hosted-runners/about-self-hosted-runners)
+* [Adding self-hosted runners](https://docs.github.com/en/actions/hosting-your-own-runners/managing-self-hosted-runners/adding-self-hosted-runners)
 * [A Tool for 4D Code Execution in CLI](https://blog.4d.com/a-tool-for-4d-code-execution-in-cli/)
-
 * [Workflow syntax for GitHub Actions](https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idif)
 * [Automatic token authentication](https://docs.github.com/en/actions/security-guides/automatic-token-authentication)
 * [Contexts](https://docs.github.com/en/actions/learn-github-actions/contexts)
