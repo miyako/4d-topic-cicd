@@ -1,7 +1,7 @@
 name: Test Create Release
 
 on:
-  workflow_run: 
+  workflow_dispatch: 
 
 jobs:
 
