@@ -48,7 +48,7 @@ jobs:
       - name: setup macos  
         if: ${{ matrix.os == 'macos-latest' }}
         run: |          
-          # echo "CURL_DOWNLOAD_URL=${TOOL4D_URL}/${TOOL4D_SUFFIX}.tar.xz" >> $GITHUB_ENV
+          # echo "CURL_DOWNLOAD_URL=$TOOL4D_URL/$TOOL4D_SUFFIX.tar.xz" >> $GITHUB_ENV
       - name: checkout repository
         uses: actions/checkout@v4
       - name: download tool4d
