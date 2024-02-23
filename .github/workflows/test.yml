@@ -52,7 +52,8 @@ jobs:
       version: 20.2
       build: latest
       
-  test:
+  checkout:
+    needs: get
     strategy:
       matrix:
         os: [windows-latest, macos-latest]
@@ -64,18 +65,25 @@ jobs:
 # end of generic code
 # customise the fail condition here
 # in the example below, we test the result log file
-
-      - name: unit tests
-        run: |
-          ${TOOL4D_EXECUTABLE_PATH} ${PROJECT_PATH} --startup-method=${PROJECT_STARTUP_METHOD} --dataless
-          UTestResult=`cat application/UTestResult.txt`
-          value=`head -n 1 application/UTestResult.txt`
-          rm application/UTestResult.txt
-          if [ "$value" = "Unit tests failed" ]
-          then
-            exit 1
-          fi
-        shell: bash
-        env:
-          TOOL4D_EXECUTABLE_PATH: ${{ steps.get.outputs.tool4d_executable_path }}
-          CURL_DOWNLOAD_URL: ${{ steps.get.outputs.tool4d_download_url }}
+   
+  test:
+    needs: checkout
+    strategy:
+      matrix:
+        os: [windows-latest, macos-latest]
+    runs-on: ${{ matrix.os }}     
+    steps:
+    - name: unit tests
+      run: |
+        ${TOOL4D_EXECUTABLE_PATH} ${PROJECT_PATH} --startup-method=${PROJECT_STARTUP_METHOD} --dataless
+        UTestResult=`cat application/UTestResult.txt`
+        value=`head -n 1 application/UTestResult.txt`
+        rm application/UTestResult.txt
+        if [ "$value" = "Unit tests failed" ]
+        then
+          exit 1
+        fi
+      shell: bash
+      env:
+        TOOL4D_EXECUTABLE_PATH: ${{ steps.get.outputs.tool4d_executable_path }}
+        CURL_DOWNLOAD_URL: ${{ steps.get.outputs.tool4d_download_url }}
