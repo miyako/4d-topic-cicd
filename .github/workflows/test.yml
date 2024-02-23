@@ -37,12 +37,14 @@ jobs:
           echo "TOOL4D_EXECUTABLE_PATH=tool4d.app/Contents/MacOS/tool4d" >> $GITHUB_ENV  
       - name: checkout repository
         uses: actions/checkout@v4
-        
+      - run: echo   
       - name: download tool4d
         run: |        
           curl https://resources-download.4d.com/release/$TOOL4D_BRANCH/$TOOL4D_VERSION/$TOOL4D_BUILD/$TOOL4D_PLATFORM/tool4d_v$TOOL4D_VERSION_$TOOL4D_PLATFORM$TOOL4D_SUFFIX.tar.xz -o tool4d.tar.xz -sL
           tar xvJf tool4d.tar.xz
-
+        env: 
+          TOOL4D_BRANCH: ${{ env.TOOL4D_BRANCH }}
+          
 # end of generic code
 # customise the fail condition here
 # in the example below, we test the result log file
