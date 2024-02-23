@@ -52,7 +52,7 @@ jobs:
         run: |
           tool4d.app/Contents/MacOS/tool4d ./compiler/Project/compiler.4DProject --startup-method=localbuild --user-param=$PWD/application/Settings/buildApp.4DSettings,$PWD/application/Project/application.4DProject --dataless
       - name: prepare for distribution
-        if: ${{ github.event_name == 'workflow_call' }}
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.version != null }}
         run: |
           DEVELOPER_ID="Developer ID Application: keisuke miyako (Y69CWUC25B)"
           PRODUCT_PATH=$PWD/build/application.app
