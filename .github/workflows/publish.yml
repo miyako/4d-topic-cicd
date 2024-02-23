@@ -15,15 +15,24 @@ on:
         type: boolean
         description: run tests
         default: true
-
-env: 
-
-  DEVELOPER_ID: "Developer ID Application: keisuke miyako (Y69CWUC25B)"
-  BUILD_DIR: build        
-  PRODUCT_NAME: application   
-  NOTARYTOOL_KEYCHAIN_PROFILE: notarytool
-  BUILD_PROJECT_PATH: application/Project/application.4DProject
-  BUILD_SETTINGS_PATH: application/Settings/buildApp.4DSettings
+      developer_id: 
+        type: string
+        default: "Developer ID Application: keisuke miyako (Y69CWUC25B)"
+      build_dir: 
+        type: string
+        default: build
+      product_name: 
+        type: string
+        default: application
+      notarytool_keychain_profile: 
+        type: string
+        default: notarytool
+      build_project_path: 
+        type: string
+        default: application/Project/application.4DProject
+      build_settings_path: 
+        type: string
+        default: application/Settings/buildApp.4DSettings
   
 jobs:
 
@@ -48,10 +57,10 @@ jobs:
       version: ${{ needs.bump.outputs.version }}
       mode: ${{ needs.bump.outputs.mode }}
       upload_url: ${{ needs.release.outputs.upload_url }}
-      
-      developer_id: ${{ env.DEVELOPER_ID }}
-      build_dir: ${{ env.BUILD_DIR }}
-      product_name: ${{ env.PRODUCT_NAME }}
-      notarytool_keychain_profile: ${{ env.NOTARYTOOL_KEYCHAIN_PROFILE }}
-      build_project_path: ${{ env.BUILD_PROJECT_PATH }}
-      build_settings_path: ${{ env.BUILD_SETTINGS_PATH }}
+      # env is not available in this context
+      developer_id: ${{ inputs.developer_id }}
+      build_dir: ${{ inputs.build_dir }}
+      product_name: ${{ inputs.product_name }}
+      notarytool_keychain_profile: ${{ inputs.notarytool_keychain_profile }}
+      build_project_path: ${{ inputs.build_project_path }}
+      build_settings_path: ${{ inputs.build_settings_path }}
