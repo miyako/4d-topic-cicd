@@ -25,7 +25,7 @@ on:
         required: true
         type: boolean
 
-env: 
+env:
 
   TOOL4D_URL: https://resources-download.4d.com/release/
   TOOL4D_PLATFORM: ""
@@ -36,34 +36,23 @@ env:
   TOOL4D_EXECUTABLE_PATH: ""
   CURL_DOWNLOAD_URL: ""
   PROJECT_STARTUP_METHOD: test
-  PROJECT_PATH: ./application/Project/application.4DProject
-  
+  PROJECT_PATH: ./application/Project/application.4DProject       
+      
 jobs:
 
   get:
     strategy:
       matrix:
-        os: [windows-latest, macos-latest]    
+        os: [windows-latest, macos-latest]
+        env: ${{ env }}
     uses: miyako/4D/.github/workflows/get-tool.yml@v1
     with:
       platform: ${{ toJSON(matrix.os) }}
       labels: ${{ toJSON(matrix.os) }}
-      branch: ${{ env.TOOL4D_BRANCH }}
-      version: ${{ env.TOOL4D_VERSION }}
-      build: ${{ env.TOOL4D_BUILD }}
-          
-  # get: 
-  #   strategy:
-  #     matrix:
-  #       os: [windows-latest, macos-latest]
-  #   uses: miyako/4D/.github/workflows/get-tool.yml@v1
-  #   with:
-  #     platform: ${{ matrix.os }}
-  #     labels: ${{ matrix.os }}
-  #     branch: 20.x
-  #     version: 20.2
-  #     build: latest
-      
+      branch: ${{ matrix.env.TOOL4D_BRANCH }}
+      version: ${{ matrix.env.TOOL4D_VERSION }}
+      build: ${{ matrix.env.TOOL4D_BUILD }}
+    
   checkout:
     needs: get
     strategy:
