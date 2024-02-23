@@ -1,7 +1,6 @@
 name: Build
 
-on:
-      
+on:      
   workflow_call: 
     inputs:
       version: 
