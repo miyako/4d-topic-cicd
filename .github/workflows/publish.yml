@@ -18,8 +18,9 @@ jobs:
     with:
       mode: ${{ github.event.inputs.mode }} 
       
-  version:
-    runs-on: ubuntu-latest
+  build:
     needs: bump
-    steps:
-      - run: echo ${{ needs.bump.outputs.version }}
+    uses: ./.github/workflows/build.yml
+    with:
+      version: ${{ needs.bump.outputs.version }}
+      mode: ${{ needs.bump.outputs.mode }}
