@@ -25,17 +25,10 @@ jobs:
 
   release:
     needs: bump
-    uses: ./.github/workflows/create-release.yml
+    uses: miyako/4D/.github/workflows/create-release@v1
     with:
       version: ${{ needs.bump.outputs.version }}
       mode: ${{ needs.bump.outputs.mode }} 
-
-  # test:
-  #   if: ${{ github.event.inputs.test }}
-  #   uses: ./.github/workflows/test.yml
-  #   with:
-  #     windows: true
-  #     macos: true
       
   build:
     needs: 
