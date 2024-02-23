@@ -10,14 +10,18 @@ on:
       mode: 
         required: true
         type: string
+      upload_url:
+        required: true
+        type: string
 
 env: 
+
   DEVELOPER_ID: "Developer ID Application: keisuke miyako (Y69CWUC25B)"
   BUILD_DIR: build        
         
 jobs:
           
-  compile:
+  build:
     runs-on: [self-hosted]
     
     steps:
@@ -44,7 +48,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          upload_url: ${{ steps.release.outputs.upload_url }}
+          upload_url: ${{ inputs.upload_url }}
           asset_path: ./${BUILD_DIR}/application.dmg
           asset_name: application.dmg
           asset_content_type: application/octet-stream
