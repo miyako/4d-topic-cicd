@@ -13,3 +13,4 @@
 * [Automatic token authentication](https://docs.github.com/en/actions/security-guides/automatic-token-authentication)
 * [Contexts](https://docs.github.com/en/actions/learn-github-actions/contexts)
 * [Variables](https://docs.github.com/en/actions/learn-github-actions/variables)
+* [Expressions](https://docs.github.com/en/actions/learn-github-actions/expressions)
