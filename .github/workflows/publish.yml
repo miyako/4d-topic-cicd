@@ -19,7 +19,7 @@ jobs:
     with:
       mode: ${{ github.event.inputs.mode }} 
 
-  create-release:
+  release:
     needs: bump
     uses: ./.github/workflows/create-release.yml
     with:
@@ -27,8 +27,11 @@ jobs:
       mode: ${{ needs.bump.outputs.mode }} 
       
   build:
-    needs: bump
+    needs: 
+    - bump
+    - release
     uses: ./.github/workflows/build.yml
     with:
       version: ${{ needs.bump.outputs.version }}
       mode: ${{ needs.bump.outputs.mode }}
+      upload_url: ${{ needs.release.outputs.upload_url }}
