@@ -17,7 +17,7 @@ This workflow does the following:
 4. Download [`tool4d`](https://developer.4d.com/docs/Admin/cli/#using-tool4d)
 5. Run a specific [`--startup-method`](https://developer.4d.com/docs/Admin/cli/#launch-a-4d-application) with `tool4d` and `compiler` project 
 
-Sample result: https://github.com/miyako/4d-topic-cicd/actions/runs/8025901243
+Sample result: [actions/runs/8025901243](https://github.com/miyako/4d-topic-cicd/actions/runs/8025901243)
 
 Only changes relevant to code execution will trigger the workflow:
 
@@ -100,7 +100,7 @@ This workflow does the following:
 9. Build, sign for distribtuion (Developer ID Application), archive, notarise, staple the product
 10. Uploaded .dmg to the release created earlier
 
-Sample result: https://github.com/miyako/4d-topic-cicd/actions/runs/8026391330
+Sample result: [actions/runs/8026391330](https://github.com/miyako/4d-topic-cicd/actions/runs/8026391330)
 
 This workflow is also triggered automatically, according to the same filter as `🌀Run Tests`.
 
@@ -115,7 +115,7 @@ This workflow is also triggered automatically, according to the same filter as `
 9. Build, adhoc sign to run locally
 10. (Do not archive or upload the .app)
 
-Sample result: https://github.com/miyako/4d-topic-cicd/actions/runs/8026309928
+Sample result: [actions/runs/8026309928](https://github.com/miyako/4d-topic-cicd/actions/runs/8026309928)
 
 ---
 
