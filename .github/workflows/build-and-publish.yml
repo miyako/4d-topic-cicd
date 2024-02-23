@@ -1,6 +1,13 @@
-name: 🎉Publish
-
-on:     
+name: 🎉Build and Publish
+  
+on:
+  push:
+    branches:
+    - main
+    paths:
+      - '*/Project/Sources/**/*.4dm'
+      - '*/Project/Sources/*/*.4DForm'
+      - '*/Project/Sources/*.4DCatalog'  
   workflow_dispatch:
     inputs:
       mode:
@@ -36,18 +43,62 @@ on:
 jobs:
 
   bump:
+    if: ${{ github.event_name == 'workflow_dispatch' }}
     uses: miyako/4D/.github/workflows/bump.yml@v1
     with:
       mode: ${{ github.event.inputs.mode }} 
 
   release:
+    if: ${{ github.event_name == 'workflow_dispatch' }}
     needs: bump
     uses: miyako/4D/.github/workflows/create-release.yml@v1
     with:
       version: ${{ needs.bump.outputs.version }}
       mode: ${{ needs.bump.outputs.mode }} 
 
-  tool4d:
+  development:
+    if: ${{ github.event_name == 'push' }}
+    runs-on: [macos, self-hosted]
+    steps:
+    
+      - name: checkout 
+        uses: actions/checkout@v4
+
+      - name: get tool4d
+        id: get
+        uses: miyako/4D/.github/actions/get-tool@v1
+        with:
+          platform: macos
+          branch: 20.x
+          version: 20.2
+          build: latest
+          arch: arm    
+          
+      - name: run tests
+        uses: ./.github/actions/run-tests
+        with:
+          tool4d_download_url: ${{ steps.get.outputs.tool4d_download_url }}
+          tool4d_executable_path: ${{ steps.get.outputs.tool4d_executable_path }}
+          startup_method: test
+          project_path: ./application/Project/application.4DProject 
+
+      - name: build macos
+        id: build
+        uses: miyako/4D/.github/actions/build-macos@v1
+        with:
+          deployment: false
+          version: ${{ needs.bump.outputs.version }}
+          mode: ${{ needs.bump.outputs.mode }}
+          upload_url: ${{ needs.release.outputs.upload_url }}
+          developer_id: ${{ inputs.developer_id }}
+          build_dir: ${{ inputs.build_dir }}
+          product_name: ${{ inputs.product_name }}
+          notarytool_keychain_profile: ${{ inputs.notarytool_keychain_profile }}
+          build_project_path: ${{ inputs.build_project_path }}
+          build_settings_path: ${{ inputs.build_settings_path }}    
+    
+  deployment:
+    if: ${{ github.event_name == 'workflow_dispatch' }}
     needs: 
     - bump
     - release
@@ -71,7 +122,7 @@ jobs:
         id: build
         uses: miyako/4D/.github/actions/build-macos@v1
         with:
-          deployment: ${{ github.event_name == 'workflow_dispatch' && needs.bump.outputs.version != null }}
+          deployment: true
           version: ${{ needs.bump.outputs.version }}
           mode: ${{ needs.bump.outputs.mode }}
           upload_url: ${{ needs.release.outputs.upload_url }}
