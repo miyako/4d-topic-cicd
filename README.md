@@ -68,11 +68,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        TOOL4D_PLATFORM: ["windows-latest", "macos-latest"]
-        TOOL4D_BRANCH: [20.x]
-        TOOL4D_VERSION: [20.2]
-        TOOL4D_BUILD: [test] 
-        TOOL4D_STARTUP_METHOD: [latest] 
+        TOOL4D_BUILD: [latest] 
+        TOOL4D_STARTUP_METHOD: [test] 
         TOOL4D_STARTUP_PROJECT_PATH: [./application/Project/application.4DProject] 
     runs-on: ${{ matrix.TOOL4D_PLATFORM }}
     steps:
