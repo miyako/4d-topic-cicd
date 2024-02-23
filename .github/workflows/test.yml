@@ -44,6 +44,8 @@ jobs:
     strategy:
       matrix:
         os: [windows-latest, macos-latest]
+    runs-on: ${{ matrix.os }}    
+    
     # uses: miyako/4D/.github/workflows/get-tool.yml@v1
     # with:
     #   platform: ${{ toJSON(matrix.os) }}
@@ -51,6 +53,7 @@ jobs:
     #   branch: 20.x
     #   version: 20.2
     #   build: latest
+    
     steps:
     - name: echo 
       run: |
