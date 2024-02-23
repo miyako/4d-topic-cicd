@@ -34,7 +34,7 @@ jobs:
     needs: 
     - bump
     - release
-    uses: ./.github/workflows/build.yml
+    uses: ./.github/workflows/build-macos.yml
     with:
       version: ${{ needs.bump.outputs.version }}
       mode: ${{ needs.bump.outputs.mode }}
