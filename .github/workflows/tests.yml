@@ -1,4 +1,4 @@
-name: Test
+name: Runs tests on multiple platforms
 
 on:
   push:
@@ -36,11 +36,12 @@ jobs:
         TOOL4D_VERSION: [20.2]
         TOOL4D_BUILD: [latest] 
       # env is unavailable in a strategy
-    uses: miyako/4D/.github/workflows/get-tool.yml@v1
+    uses: ./.github/workflows/test.yml
     with:
       platform: ${{ matrix.TOOL4D_PLATFORM }}
       labels: ${{ toJSON(matrix.TOOL4D_PLATFORM) }} # must be JSON
       branch: ${{ matrix.TOOL4D_BRANCH }}
       version: ${{ matrix.TOOL4D_VERSION }}
       build: ${{ matrix.TOOL4D_BUILD }}
-      onready: ./github/workflows/test_1.yml
+      windows: ${{ inputs.windows }}
+      macos: ${{ inputs.macos }}
