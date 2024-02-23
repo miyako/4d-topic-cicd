@@ -37,7 +37,7 @@ env:
 
 jobs:
   get:
-    runs-on: ${{ fromJSON(input.labels) }}
+    runs-on: ${{ fromJSON(inputs.labels) }}
     outputs:
       tool4d_download_url: ${{ steps.get.outputs.tool4d_download_url }}
       tool4d_executable_path: ${{ steps.get.outputs.tool4d_executable_path }}
