@@ -100,6 +100,8 @@ This workflow does the following:
 9. Build, sign for distribtuion (Developer ID Application), archive, notarise, staple the product
 10. Uploaded .dmg to the release created earlier
 
+Sample result: https://github.com/miyako/4d-topic-cicd/actions/runs/8026391330
+
 This workflow is also triggered automatically, according to the same filter as `🌀Run Tests`.
 
 1. (Do not prompt for inputs)
