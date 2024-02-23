@@ -11,6 +11,10 @@ on:
         - minor 
         - major
         required: true
+      test:
+        type: boolean
+        description: run tests
+        default: true
 
 jobs:
 
@@ -25,6 +29,13 @@ jobs:
     with:
       version: ${{ needs.bump.outputs.version }}
       mode: ${{ needs.bump.outputs.mode }} 
+
+  test:
+    if: ${{ github.event.inputs.test }}
+    uses: ./.github/workflows/test.yml
+    with:
+      windows: true
+      macos: true
       
   build:
     needs: 
