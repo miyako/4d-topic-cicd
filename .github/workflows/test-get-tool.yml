@@ -6,7 +6,6 @@ on:
 jobs:
 
   test:
-    # uses: ./.github/workflows/get-tool.yml
     uses: miyako/4D/.github/workflows/get-tool.yml@v1
     with:
       platform: macos
