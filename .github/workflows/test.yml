@@ -4,6 +4,10 @@ on:
   push:
     branches:
     - main
+    paths:
+      - '**/*.4dm'
+      - '**/*.4DForm'
+      - '**/*.4DCatalog'      
   workflow_dispatch:
   workflow_call:
   
