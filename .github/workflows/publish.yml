@@ -1,0 +1,20 @@
+name: Publish
+
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        type: choice
+        description: semantic versioning
+        options: 
+        - patch
+        - minor 
+        - major
+        required: true
+
+jobs:
+    bump:
+      uses: ./.github/workflows/bump.yml
+      with:
+        version: ${VERSION}
+        mode: ${{ github.event.inputs.mode }} 
