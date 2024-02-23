@@ -17,6 +17,8 @@ This workflow does the following
 4. download [`tool4d`](https://developer.4d.com/docs/Admin/cli/#using-tool4d)
 5. run a specific [`--startup-method`](https://developer.4d.com/docs/Admin/cli/#launch-a-4d-application) with `tool4d` and `compiler` project 
 
+Sample result: https://github.com/miyako/4d-topic-cicd/actions/runs/8025901243
+
 Only changes relevant to code execution will trigger the workflow:
 
 ```yml
