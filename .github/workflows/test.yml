@@ -35,12 +35,12 @@ jobs:
         os: [windows-latest, macos-latest]
     runs-on: ${{ matrix.os }}   
     steps:
-      - name: get platform
-        if: ${{ (matrix.os == 'windows-latest') && (github.event.inputs.windows == true) }}
+      - name: get platform windows
+        if: ${{ (matrix.os == 'windows-latest') }}
         run: |
           echo "platform=windows" >> $GITHUB_ENV
-      - name: get platform
-        if: ${{ (matrix.os == 'macos-latest') && (github.event.inputs.macos == true) }}
+      - name: get platform macos
+        if: ${{ (matrix.os == 'macos-latest') }}
         run: |
           echo "platform=macos" >> $GITHUB_ENV
       - name: setup windows
