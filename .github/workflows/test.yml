@@ -14,6 +14,7 @@ jobs:
         TOOL4D_BUILD: [latest] 
     runs-on: ${{ matrix.TOOL4D_PLATFORM }}
     steps:
+    
       - name: get tool4d
         id: get
         uses: miyako/4D/.github/actions/get-tool@v1
@@ -22,6 +23,10 @@ jobs:
           branch: 20.x
           version: 20.2
           build: latest
+
+      - name: checkout 
+        uses: actions/checkout@v4
+          
       - name: run tests
         uses: ./.github/actions/run-tests
         with:
