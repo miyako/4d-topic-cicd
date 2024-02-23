@@ -1,6 +1,9 @@
 name: 🎉Publish
 
-on:
+on:     
+  push:
+    branches:
+      - main
   workflow_dispatch:
     inputs:
       mode:
@@ -82,6 +85,7 @@ jobs:
       - name: build macos
         uses: miyako/4D/.github/actions/build-macos@v1
         with:
+          deployment: ${{ github.event_name == 'workflow_dispatch' && needs.bump.outputs.version != null }}
           version: ${{ needs.bump.outputs.version }}
           mode: ${{ needs.bump.outputs.mode }}
           upload_url: ${{ needs.release.outputs.upload_url }}
