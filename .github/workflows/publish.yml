@@ -42,8 +42,8 @@ jobs:
           run: |
             VERSION=`cat package.json | jq -r '.version'`
 
-    publish:
-      uses: ./.github/workflows/publish.yml
+    build:
+      uses: ./.github/workflows/build.yml
       with:
         version: ${VERSION}
         mode: ${{ github.event.inputs.mode }} 
