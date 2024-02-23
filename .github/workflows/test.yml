@@ -45,7 +45,7 @@ jobs:
           curl ${CURL_DOWNLOAD_URL} -o tool4d.tar.xz -sL
           tar xvJf tool4d.tar.xz
         env: 
-          CURL_DOWNLOAD_URL: ${{ env.TOOL4D_URL + env.TOOL4D_BRANCH + "/" + env.TOOL4D_VERSION + "/" + env.TOOL4D_BUILD + "/" + env.TOOL4D_PLATFORM + "/tool4d_v" + env.TOOL4D_VERSION + "_" + env.TOOL4D_PLATFORM + "_" + env.TOOL4D_SUFFIX + ".tar.xz" }}
+          CURL_DOWNLOAD_URL: ${{ env.TOOL4D_URL + env.TOOL4D_BRANCH + '/' + env.TOOL4D_VERSION + '/' + env.TOOL4D_BUILD + '/' + env.TOOL4D_PLATFORM + '/tool4d_v' + env.TOOL4D_VERSION + '_' + env.TOOL4D_PLATFORM + '_' + env.TOOL4D_SUFFIX + '.tar.xz' }}
           
 # end of generic code
 # customise the fail condition here
