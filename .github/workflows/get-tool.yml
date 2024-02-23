@@ -6,6 +6,9 @@ on:
       platform:
         required: true
         type: string
+      runs_on: 
+        required: true
+        type: string
       branch: 
         required: true
         type: string
@@ -34,7 +37,7 @@ env:
 
 jobs:
   get:
-    runs-on: [macos, windows]
+    runs-on: ${{ input.runs_on }}
     outputs:
       tool4d_download_url: ${{ steps.get.outputs.tool4d_download_url }}
       tool4d_executable_path: ${{ steps.get.outputs.tool4d_executable_path }}
