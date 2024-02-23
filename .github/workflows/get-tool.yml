@@ -1,0 +1,83 @@
+name: Get Tool
+
+on:
+ workflow_call:
+    inputs:
+      platform:
+        required: true
+        type: string
+      branch: 
+        required: true
+        type: string
+      version: 
+        required: true
+        type: string
+      build: 
+        required: true
+        type: string
+    outputs:
+       tool4d_download_url:
+         value: ${{ jobs.get.outputs.tool4d_download_url }}
+       tool4d_executable_path:
+         value: ${{ jobs.get.outputs.tool4d_executable_path }}
+         
+env: 
+
+  TOOL4D_URL: https://resources-download.4d.com/release/
+  TOOL4D_PLATFORM: ${{ inputs.platform }}
+  TOOL4D_BRANCH: ${{ inputs.branch }}
+  TOOL4D_VERSION: ${{ inputs.version }}
+  TOOL4D_BUILD: ${{ inputs.build }} 
+  TOOL4D_SUFFIX: ""
+  TOOL4D_EXECUTABLE_PATH: ""
+  CURL_DOWNLOAD_URL: ""
+
+jobs:
+  get:
+    runs-on: [macos, windows]
+    outputs:
+      tool4d_download_url: ${{ steps.get.outputs.tool4d_download_url }}
+      tool4d_executable_path: ${{ steps.get.outputs.tool4d_executable_path }}
+    steps:
+      - name: check platform windows
+        if: ${{ startsWith(inputs.platform, 'windows') }}
+        run: |
+          chcp 65001 #set code page to utf-8
+          echo ("platform=windows") >> $env:GITHUB_ENV
+      - name: check platform macos
+        if: ${{ startsWith(inputs.platform, 'macos') }}
+        run: |
+          echo "platform=macos" >> $GITHUB_ENV
+      - name: check platform windows
+        if: ${{ env.platform == 'windows' }}
+        run: |
+          chcp 65001 #set code page to utf-8
+          echo ("TOOL4D_PLATFORM=win") >> $env:GITHUB_ENV
+          echo ("TOOL4D_SUFFIX=") >> $env:GITHUB_ENV
+          echo ("TOOL4D_EXECUTABLE_PATH=./tool4d/tool4d.exe") >> $env:GITHUB_ENV    
+      - name: check platform windows
+        if: ${{ env.platform == 'windows' }}
+        run: |
+          chcp 65001 #set code page to utf-8
+          echo ("CURL_DOWNLOAD_URL="+$env:TOOL4D_URL+$env:TOOL4D_BRANCH+"/"+$env:TOOL4D_VERSION+"/"+$env:TOOL4D_BUILD+"/"+$env:TOOL4D_PLATFORM+"/tool4d_v"+$env:TOOL4D_VERSION+"_"+$env:TOOL4D_PLATFORM+$env:TOOL4D_SUFFIX+".tar.xz") >> $env:GITHUB_ENV
+      - name: check platform macos   
+        if: ${{ env.platform == 'macos' }}
+        run: |
+          echo "TOOL4D_PLATFORM=mac" >> $GITHUB_ENV
+          echo "TOOL4D_SUFFIX=_x86" >> $GITHUB_ENV # github macos vm runs on intel 
+          echo "TOOL4D_EXECUTABLE_PATH=tool4d.app/Contents/MacOS/tool4d" >> $GITHUB_ENV         
+      - name: check platform macos  
+        if: ${{ env.platform == 'macos' }}
+        run: |          
+          echo "CURL_DOWNLOAD_URL=${TOOL4D_URL}${TOOL4D_BRANCH}/${TOOL4D_VERSION}/${TOOL4D_BUILD}/${TOOL4D_PLATFORM}/tool4d_v${TOOL4D_VERSION}_${TOOL4D_PLATFORM}${TOOL4D_SUFFIX}.tar.xz" >> $GITHUB_ENV
+   
+      - name: download tool4d
+        if: ${{ env.platform }}
+        run: |          
+          curl "${CURL_DOWNLOAD_URL}" -o tool4d.tar.xz -sL
+          tar xvJf tool4d.tar.xz
+        shell: bash
+      - id: get  
+        run: |
+            echo "tool4d_download_url=${CURL_DOWNLOAD_URL}" >> $GITHUB_OUTPUT
+            echo "tool4d_executable_path=${TOOL4D_EXECUTABLE_PATH}" >> $GITHUB_OUTPUT
