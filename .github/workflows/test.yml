@@ -55,7 +55,7 @@ jobs:
       - name: download tool4d windows
         if: ${{ matrix.os == 'windows-latest' }}
         run: |          
-          curl $env:CURL_DOWNLOAD_URL -o tool4d.tar.xz -sL
+          -Command { curl $env:CURL_DOWNLOAD_URL -o tool4d.tar.xz -sL }
           tar xvJf tool4d.tar.xz -C tool4d       
       - name: download tool4d macos
         if: ${{ matrix.os == 'macos-latest' }}
@@ -70,7 +70,7 @@ jobs:
       - name: unit tests windows
         if: ${{ matrix.os == 'windows-latest' }}
         run: |          
-          $env:TOOL4D_EXECUTABLE_PATH $env:PROJECT_PATH --startup-method=$env:PROJECT_STARTUP_METHOD --dataless
+          -Command { $env:TOOL4D_EXECUTABLE_PATH $env:PROJECT_PATH --startup-method=$env:PROJECT_STARTUP_METHOD --dataless }
           UTestResult=`cat application/UTestResult.txt`
           value=`head -n 1 application/UTestResult.txt`
           rm application/UTestResult.txt
