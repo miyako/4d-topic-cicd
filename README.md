@@ -3,6 +3,8 @@
 [![license](https://img.shields.io/github/license/miyako/4d-topic-cicd)](LICENSE)
 ![downloads](https://img.shields.io/github/downloads/miyako/4d-topic-cicd/total)
 
+A CI/CD template project.
+
 # workflows
 
 ## [Test](https://github.com/miyako/4d-topic-cicd/blob/main/.github/workflows/test.yml)
