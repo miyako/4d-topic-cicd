@@ -1,0 +1,6 @@
+//%attributes = {}
+/*
+
+trigger a workflow!
+
+*/
