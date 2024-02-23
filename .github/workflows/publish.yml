@@ -38,3 +38,12 @@ jobs:
         - name: git push
           run: |
             git push origin
+        - name: get version
+          run: |
+            VERSION=`cat package.json | jq -r '.version'`
+
+    publish:
+      uses: ./.github/workflows/publish.yml
+      with:
+        version: ${VERSION}
+        mode: ${{ github.event.inputs.mode }} 
