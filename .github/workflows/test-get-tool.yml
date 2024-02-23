@@ -6,7 +6,8 @@ on:
 jobs:
 
   test:
-    uses: ./.github/workflows/get-tool.yml
+    # uses: ./.github/workflows/get-tool.yml
+    uses: miyako/4D/.github/workflows/get-tool.yml@v1
     with:
       platform: macos
       labels: "[\"macos\", \"self-hosted\"]"
