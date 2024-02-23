@@ -23,7 +23,7 @@ jobs:
           version: 20.2
           build: latest
       - name: run tests
-        uses: ./.github/actions/run-tests@v1
+        uses: ./.github/actions/run-tests
         with:
           tool4d_download_url: steps.get.outputs.tool4d_download_url
           tool4d_executable_path: steps.get.outputs.tool4d_download_url
