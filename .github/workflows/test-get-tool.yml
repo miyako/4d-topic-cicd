@@ -9,7 +9,7 @@ jobs:
     uses: ./.github/workflows/get-tool.yml
     with:
       platform: macos
-      labels: "[macos, self-hosted]"
+      labels: "[\"macos\", \"self-hosted\"]"
       branch: 20.x
       version: 20.2
       build: 100959
