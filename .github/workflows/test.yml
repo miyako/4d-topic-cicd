@@ -53,13 +53,13 @@ jobs:
     #   build: latest
     steps:
     - name: echo 
-    run: |
-      echo "TOOL4D_BUILD: ${TOOL4D_BUILD}"
-    env: 
-      TOOL4D_BUILD: ${{ env.TOOL4D_BUILD }}
-      TOOL4D_BRANCH: ${{ env.TOOL4D_BRANCH }}
-      TOOL4D_VERSION: ${{ env.TOOL4D_VERSION }}
-      TOOL4D_PLATFORM: ${{ env.TOOL4D_PLATFORM }}
+      run: |
+        echo "TOOL4D_BUILD: ${TOOL4D_BUILD}"
+      env: 
+        TOOL4D_BUILD: ${{ env.TOOL4D_BUILD }}
+        TOOL4D_BRANCH: ${{ env.TOOL4D_BRANCH }}
+        TOOL4D_VERSION: ${{ env.TOOL4D_VERSION }}
+        TOOL4D_PLATFORM: ${{ env.TOOL4D_PLATFORM }}
       
   # get: 
   #   strategy:
