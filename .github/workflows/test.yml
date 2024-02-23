@@ -8,8 +8,8 @@ on:
   workflow_dispatch: 
    inputs:
       windows:
-        type: boolean-latest
-        description: windows
+        type: boolean
+        description: windows-latest
         default: true
       macos:
         type: boolean
