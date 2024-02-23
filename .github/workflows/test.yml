@@ -27,28 +27,28 @@ jobs:
         os: [windows-latest, macos-latest]
     runs-on: ${{ matrix.os }}
     steps:
-      - name: setup windows #1
+      - name: setup windows
         if: ${{ matrix.os == 'windows-latest' }}
         run: |
           chcp 65001 #set code page to utf-8
           echo ("TOOL4D_PLATFORM=win") >> $env:GITHUB_ENV
           echo ("TOOL4D_SUFFIX=") >> $env:GITHUB_ENV
           echo ("TOOL4D_EXECUTABLE_PATH=") >> $env:GITHUB_ENV
-      - name: setup windows #2
+      - name: setup windows
         if: ${{ matrix.os == 'windows-latest' }}
         run: |
           chcp 65001 #set code page to utf-8
           echo ("CURL_DOWNLOAD_URL=${TOOL4D_URL}/${TOOL4D_BRANCH}/${TOOL4D_VERSION}/${TOOL4D_BUILD}/${TOOL4D_PLATFORM}/tool4d_v${TOOL4D_VERSION}_${TOOL4D_PLATFORM}${TOOL4D_SUFFIX}.tar.xz") >> $env:GITHUB_ENV
-      - name: setup macos#1    
+      - name: setup macos   
         if: ${{ matrix.os == 'macos-latest' }}
         run: |
           echo "TOOL4D_PLATFORM=mac" >> $GITHUB_ENV
           echo "TOOL4D_SUFFIX=_arm" >> $GITHUB_ENV  
           echo "TOOL4D_EXECUTABLE_PATH=tool4d.app/Contents/MacOS/tool4d" >> $GITHUB_ENV
-      - name: setup macos#2    
+      - name: setup macos  
         if: ${{ matrix.os == 'macos-latest' }}
         run: |          
-          # echo "CURL_DOWNLOAD_URL=${TOOL4D_URL}/${TOOL4D_BRANCH}/${TOOL4D_VERSION}/${TOOL4D_BUILD}/${TOOL4D_PLATFORM}/tool4d_v${TOOL4D_VERSION}_${TOOL4D_PLATFORM}${TOOL4D_SUFFIX}.tar.xz" >> $GITHUB_ENV
+          # echo "CURL_DOWNLOAD_URL=${TOOL4D_URL}/${TOOL4D_SUFFIX}.tar.xz" >> $GITHUB_ENV
       - name: checkout repository
         uses: actions/checkout@v4
       - name: download tool4d
