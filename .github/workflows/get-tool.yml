@@ -6,7 +6,7 @@ on:
       platform:
         required: true
         type: string
-      runs_on: 
+      labels: 
         required: true
         type: string
       branch: 
@@ -37,7 +37,7 @@ env:
 
 jobs:
   get:
-    runs-on: ${{ fromJSON(input.runs_on) }}
+    runs-on: ${{ fromJSON(input.labels) }}
     outputs:
       tool4d_download_url: ${{ steps.get.outputs.tool4d_download_url }}
       tool4d_executable_path: ${{ steps.get.outputs.tool4d_executable_path }}
