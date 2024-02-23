@@ -25,7 +25,7 @@ jobs:
 
   release:
     needs: bump
-    uses: miyako/4D/.github/workflows/create-release@v1
+    uses: miyako/4D/.github/workflows/create-release.yml@v1
     with:
       version: ${{ needs.bump.outputs.version }}
       mode: ${{ needs.bump.outputs.mode }} 
