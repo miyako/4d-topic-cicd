@@ -16,29 +16,39 @@ on:
       upload_url:
         required: true
         type: string
-
-env: 
-
-  DEVELOPER_ID: "Developer ID Application: keisuke miyako (Y69CWUC25B)"
-  BUILD_DIR: build        
-  PRODUCT_NAME: application   
-  NOTARYTOOL_KEYCHAIN_PROFILE: notarytool
-  BUILD_PROJECT_PATH: application/Project/application.4DProject
-  BUILD_SETTINGS_PATH: application/Settings/buildApp.4DSettings
-  
+      developer_id:
+        required: true
+        type: string
+      build_dir:
+        required: true
+        type: string
+      product_name:
+        required: true
+        type: string
+      notarytool_keychain_profile:
+        required: true
+        type: string
+      build_project_path:
+        required: true
+        type: string
+      build_settings_path:
+        required: true
+        type: string  
+      
 jobs:
           
   build:
     uses: miyako/4D/.github/workflows/build-macos.yml@v1
     with:
-    # event_name of workflow_call is workflow_dispatch
       development: ${{ github.event_name == 'workflow_dispatch' && inputs.version != null }}
+      
       version: ${{ inputs.version }}
       mode: ${{ inputs.mode }}
       upload_url: ${{ inputs.upload_url }}
-      developer_id: ${{ env.DEVELOPER_ID }}
-      build_dir: ${{ env.BUILD_DIR }}
-      product_name: ${{ env.PRODUCT_NAME }}
-      notarytool_keychain_profile: ${{ env.NOTARYTOOL_KEYCHAIN_PROFILE }}
-      build_project_path: ${{ env.BUILD_PROJECT_PATH }}
-      build_settings_path: ${{ env.BUILD_SETTINGS_PATH }}
+      
+      developer_id: ${{ inputs.developer_id }}
+      build_dir: ${{ inputs.build_dir }}
+      product_name: ${{ inputs.product_name }}
+      notarytool_keychain_profile: ${{ inputs.notarytool_keychain_profile }}
+      build_project_path: ${{ inputs.build_project_path }}
+      build_settings_path: ${{ inputs.build_settings_path }}
