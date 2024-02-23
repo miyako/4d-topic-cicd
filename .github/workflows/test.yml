@@ -40,10 +40,10 @@ jobs:
       - run: echo   
       - name: download tool4d
         run: |        
-          curl https://resources-download.4d.com/release/$TOOL4D_BRANCH/$TOOL4D_VERSION/$TOOL4D_BUILD/$TOOL4D_PLATFORM/tool4d_v$TOOL4D_VERSION_$TOOL4D_PLATFORM$TOOL4D_SUFFIX.tar.xz -o tool4d.tar.xz -sL
+          curl ${CURL_DOWNLOAD_URL} -o tool4d.tar.xz -sL
           tar xvJf tool4d.tar.xz
         env: 
-          TOOL4D_BRANCH: ${{ env.TOOL4D_BRANCH }}
+          CURL_DOWNLOAD_URL: ${{ "https://resources-download.4d.com/release/" + env.TOOL4D_BRANCH + "/" + env.TOOL4D_VERSION + "/" + env.TOOL4D_BUILD + "/" + env.TOOL4D_PLATFORM + "/tool4d_v" + env.TOOL4D_VERSION + "_" + env.TOOL4D_PLATFORM + "_" + env.TOOL4D_SUFFIX + ".tar.xz" }}
           
 # end of generic code
 # customise the fail condition here
