@@ -46,7 +46,7 @@ jobs:
           curl ${CURL_DOWNLOAD_URL} -o tool4d.tar.xz -sL
           tar xvJf tool4d.tar.xz
         env: 
-          CURL_DOWNLOAD_URL: ${{ join([env.TOOL4D_URL, env.TOOL4D_BRANCH, env.TOOL4D_VERSION, env.TOOL4D_BUILD, env.TOOL4D_PLATFORM, env.TOOL4D_NAME], ',' }}
+          CURL_DOWNLOAD_URL: ${{ join([env.TOOL4D_URL, env.TOOL4D_BRANCH, env.TOOL4D_VERSION, env.TOOL4D_BUILD, env.TOOL4D_PLATFORM, env.TOOL4D_NAME], ',') }}
           
 # end of generic code
 # customise the fail condition here
