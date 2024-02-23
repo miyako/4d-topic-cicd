@@ -38,7 +38,8 @@ jobs:
       - name: get platform windows
         if: ${{ (matrix.os == 'windows-latest') && (inputs.windows) }}
         run: |
-          echo "platform=windows" >> $GITHUB_ENV
+          chcp 65001 #set code page to utf-8
+          echo ("platform=windows") >> $env:GITHUB_ENV
       - name: get platform macos
         if: ${{ (matrix.os == 'macos-latest') && (inputs.macos) }}
         run: |
