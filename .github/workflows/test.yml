@@ -56,7 +56,7 @@ jobs:
       - name: download tool4d windows
         if: ${{ matrix.os == 'windows-latest' }}
         run: |     
-          $('curl '+$env:CURL_DOWNLOAD_URL+' -o '+$env:GITHUB_WORKSPACE+'\\tool4d.tar.xz -sL')
+          $('curl '+$env:CURL_DOWNLOAD_URL+' -o '+$env:GITHUB_WORKSPACE+'\tool4d.tar.xz -sL')
           echo $(ls .)
           tar -xvJf tool4d.tar.xz -C tool4d
       - name: download tool4d macos
