@@ -36,6 +36,15 @@ on:
         type: string  
       
 jobs:
+
+  get-tool:
+    uses: miyako/4D/.github/workflows/get-tool.yml@v1
+    with:
+      platform: macos
+      labels: "[\"macos\", \"self-hosted\"]"
+      branch: 20.x
+      version: 20.2
+      build: 100959
           
   build:
     uses: miyako/4D/.github/workflows/build-macos.yml@v1
