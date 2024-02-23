@@ -1,4 +1,4 @@
-name: 🌀Test for macOS locally
+name: 🌀Test for macOS
 
 on:
   workflow_dispatch:
@@ -16,6 +16,7 @@ jobs:
           branch: 20.x
           version: 20.2
           build: latest
+          arch: arm
 
       - name: checkout 
         uses: actions/checkout@v4
