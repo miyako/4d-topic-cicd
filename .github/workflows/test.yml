@@ -53,9 +53,9 @@ jobs:
       - name: checkout repository
         uses: actions/checkout@v4
       - name: download tool4d windows
+        shell: cmd
         if: ${{ matrix.os == 'windows-latest' }}
         run: |     
-        shell: cmd
           curl %CURL_DOWNLOAD_URL% -o tool4d.tar.xz -sL
           tar xvJf tool4d.tar.xz -C tool4d       
       - name: download tool4d macos
