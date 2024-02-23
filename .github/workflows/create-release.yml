@@ -29,8 +29,8 @@ jobs:
           echo "RELEASE_NAME=${VERSION}" >> $GITHUB_ENV
           echo "TAG_NAME=${MODE}-${VERSION}" >> $GITHUB_ENV
         env: 
-          VERSION: ${{ input.version }}
-          MODE: ${{ input.mode }}
+          VERSION: ${{ inputs.version }}
+          MODE: ${{ inputs.mode }}
       - name: create release
         id: release
         uses: actions/create-release@v1
