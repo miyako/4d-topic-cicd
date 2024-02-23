@@ -4,8 +4,15 @@
 
 ## Test
 
-* invoked any time there is a push to the `main` branch
-* runs on github hosted `macos-latest` and/or `windows-latest`
+* trigger: any time there is a push to the `main` branch, or manually
+* runners: github hosted `macos-latest` and/or `windows-latest`
+
+## Build 
+
+* trigger: any time there is a push to the `main` branch, or manually
+* runners: self-hosted, `macOS`
+* when triggered automatically, sign to run locally for testing
+* when triggered manually, sign for distribtuion, notarise, staple
 
 ### 資料
 
