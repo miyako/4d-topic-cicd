@@ -33,6 +33,6 @@ jobs:
         fi
       shell: bash
       env:
-        TOOL4D_EXECUTABLE_PATH: ${{ jobs.setup.outputs.tool4d_executable_path }}
-        CURL_DOWNLOAD_URL: ${{ jobs.setup.outputs.tool4d_download_url }}
+        TOOL4D_EXECUTABLE_PATH: ${{ needs.setup.outputs.tool4d_executable_path }}
+        CURL_DOWNLOAD_URL: ${{ needs.setup.outputs.tool4d_download_url }}
     
