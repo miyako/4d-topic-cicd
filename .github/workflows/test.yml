@@ -59,8 +59,6 @@ jobs:
         run: |     
           $('curl '+$env:CURL_DOWNLOAD_URL+' -o tool4d.tar.xz -sL')
           tar xvJf tool4d.tar.xz -C tool4d  
-        env:
-          CURL_DOWNLOAD_URL: https://github.com/miyako/4d-topic-cicd/releases/download/0.0.24/tool4d_v20.2_win.tar.xz
       - name: download tool4d macos
         if: ${{ matrix.os == 'macos-latest' }}
         run: |          
