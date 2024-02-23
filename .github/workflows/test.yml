@@ -17,19 +17,20 @@ env:
   PROJECT_PATH: ./application/Project/application.4DProject
   
 jobs:
-
-  test:    
-    runs-on: [windows-latest]
-          
+  test: 
+    strategy:
+      matrix:
+        os: [windows-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
     steps:
       - name: platform windows
-        if: ${{ false || matrix.os == 'windows-latest' }}
+        if: ${{ matrix.os == 'windows-latest' }}
         run: |
           echo "TOOL4D_NAME=win" >> $GITHUB_ENV
           echo "TOOL4D_SUFFIX=" >> $GITHUB_ENV
           echo "TOOL4D_EXECUTABLE_PATH=tool4d/tool4d.exe" >> $GITHUB_ENV  
       - name: platform macos    
-        if: ${{ true || matrix.os == 'macos-latest' }}
+        if: ${{ matrix.os == 'macos-latest' }}
         run: |
           echo "TOOL4D_NAME=mac" >> $GITHUB_ENV
           echo "TOOL4D_SUFFIX=_arm" >> $GITHUB_ENV  
@@ -41,7 +42,11 @@ jobs:
         run: |        
           curl https://resources-download.4d.com/release/$TOOL4D_BRANCH/$TOOL4D_VERSION/$TOOL4D_BUILD/$TOOL4D_PLATFORM/tool4d_v$TOOL4D_VERSION_$TOOL4D_PLATFORM$TOOL4D_SUFFIX.tar.xz -o tool4d.tar.xz -sL
           tar xvJf tool4d.tar.xz
-            
+
+# end of generic code
+# customise the fail condition here
+# in the example below, we test the result log file
+
       - name: run unit tests
         run: |
           $TOOL4D_EXECUTABLE_PATH $PROJECT_PATH --startup-method=$PROJECT_STARTUP_METHOD --dataless
@@ -52,4 +57,3 @@ jobs:
           then
             exit 1
           fi
-            
