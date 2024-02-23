@@ -52,6 +52,9 @@ jobs:
       mode: ${{ needs.bump.outputs.mode }} 
 
   tool4d:
+    needs: 
+    - bump
+    - release
     runs-on: [macos, self-hosted]
     steps:
     
@@ -75,20 +78,16 @@ jobs:
           tool4d_executable_path: ${{ steps.get.outputs.tool4d_executable_path }}
           startup_method: ${{ inputs.test_startup_method }}
           project_path: ${{ inputs.build_project_path }}  
-  
-  # build:
-  #   needs: 
-  #   - tool4d
-  #   - release
-  #   uses: ./.github/workflows/build-macos.yml 
-  #   with:
-  #     version: ${{ needs.bump.outputs.version }}
-  #     mode: ${{ needs.bump.outputs.mode }}
-  #     upload_url: ${{ needs.release.outputs.upload_url }}
-  #     # env is not available in this context
-  #     developer_id: ${{ inputs.developer_id }}
-  #     build_dir: ${{ inputs.build_dir }}
-  #     product_name: ${{ inputs.product_name }}
-  #     notarytool_keychain_profile: ${{ inputs.notarytool_keychain_profile }}
-  #     build_project_path: ${{ inputs.build_project_path }}
-  #     build_settings_path: ${{ inputs.build_settings_path }}
+
+      - name: build macos
+        uses: miyako/4D/.github/actions/build-macos@v1
+        with:
+          version: ${{ needs.bump.outputs.version }}
+          mode: ${{ needs.bump.outputs.mode }}
+          upload_url: ${{ needs.release.outputs.upload_url }}
+          developer_id: ${{ inputs.developer_id }}
+          build_dir: ${{ inputs.build_dir }}
+          product_name: ${{ inputs.product_name }}
+          notarytool_keychain_profile: ${{ inputs.notarytool_keychain_profile }}
+          build_project_path: ${{ inputs.build_project_path }}
+          build_settings_path: ${{ inputs.build_settings_path }}
