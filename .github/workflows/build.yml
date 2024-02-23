@@ -70,6 +70,6 @@ jobs:
           draft: false
           prerelease: false          
       - uses: actions/upload-artifact@v4
-          with:
-            name: application.dmg
-            path: ./build/application.dmg
+        with:
+          name: application
+          path: ./build/*.dmg
