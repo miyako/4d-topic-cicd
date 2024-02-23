@@ -2,10 +2,11 @@
 
 # workflows
 
-## Test
+## [Test](https://github.com/miyako/4d-topic-cicd/blob/main/.github/workflows/test.yml)
 
 * trigger: any time there is a push to the `main` branch, or manually
 * runners: github hosted `macos-latest` and/or `windows-latest`
+* always use the latest `tool4d`
 
 ## Build 
 
