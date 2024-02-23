@@ -33,7 +33,7 @@ jobs:
   setup:
     steps:
     - name: get tool4d 
-      id:get
+      id: get
       if: ${{ env.platform }}
       uses: miyako/4D/.github/workflows/get-tool.yml@v1
       with:
