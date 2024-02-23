@@ -14,7 +14,7 @@ This workflow does the following
 1. launch 2 GitHub hosted runners: `windows-latest` `macos-latest`
 2. checkout the current repository
 3. checkout the latest [`compiler`](https://github.com/miyako/4d-class-compiler) project from releases
-4. download `tool4d`
+4. download [`tool4d`](https://developer.4d.com/docs/Admin/cli/#using-tool4d)
 5. run a specific [`--startup-method`](https://developer.4d.com/docs/Admin/cli/#launch-a-4d-application) with `tool4d` and `compiler` project 
 
 
