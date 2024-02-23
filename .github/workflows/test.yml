@@ -73,9 +73,7 @@ jobs:
         if: ${{ env.platform == 'windows' }}
         run: |     
           curl https://resources-download.4d.com/release/20.x/20.2/latest/win/tool4d_v20.2_win.tar.xz --location --silent --output tool4d.tar.xz
-          ls .
-          tar -xvJf tool4d.tar.xz -C tool4d
-          ls .
+          tar -xvJf tool4d.tar.xz
         shell: bash  
       - name: download tool4d macos
         if: ${{ env.platform == 'macos' }}
