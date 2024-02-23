@@ -45,53 +45,20 @@ jobs:
         os: [windows-latest, macos-latest]
     runs-on: ${{ matrix.os }}   
     steps:
-      - name: get platform windows
-        if: ${{ (matrix.os == 'windows-latest') && (inputs.windows || github.event_name != 'workflow_dispatch') }}
-        run: |
-          chcp 65001 #set code page to utf-8
-          echo ("platform=windows") >> $env:GITHUB_ENV
-          
-      - name: get platform macos
-        if: ${{ (matrix.os == 'macos-latest') && (inputs.macos || github.event_name != 'workflow_dispatch') }}
-        run: |
-          echo "platform=macos" >> $GITHUB_ENV
-          
-      - name: setup windows
-        if: ${{ env.platform == 'windows' }}
-        run: |
-          chcp 65001 #set code page to utf-8
-          echo ("TOOL4D_PLATFORM=win") >> $env:GITHUB_ENV
-          echo ("TOOL4D_SUFFIX=") >> $env:GITHUB_ENV
-          echo ("TOOL4D_EXECUTABLE_PATH=./tool4d/tool4d.exe") >> $env:GITHUB_ENV
-          
-      - name: setup windows
-        if: ${{ env.platform == 'windows' }}
-        run: |
-          chcp 65001 #set code page to utf-8
-          echo ("CURL_DOWNLOAD_URL="+$env:TOOL4D_URL+$env:TOOL4D_BRANCH+"/"+$env:TOOL4D_VERSION+"/"+$env:TOOL4D_BUILD+"/"+$env:TOOL4D_PLATFORM+"/tool4d_v"+$env:TOOL4D_VERSION+"_"+$env:TOOL4D_PLATFORM+$env:TOOL4D_SUFFIX+".tar.xz") >> $env:GITHUB_ENV
-          
-      - name: setup macos   
-        if: ${{ env.platform == 'macos' }}
-        run: |
-          echo "TOOL4D_PLATFORM=mac" >> $GITHUB_ENV
-          echo "TOOL4D_SUFFIX=_x86" >> $GITHUB_ENV  
-          echo "TOOL4D_EXECUTABLE_PATH=tool4d.app/Contents/MacOS/tool4d" >> $GITHUB_ENV
-          
-      - name: setup macos  
-        if: ${{ env.platform == 'macos' }}
-        run: |          
-          echo "CURL_DOWNLOAD_URL=${TOOL4D_URL}${TOOL4D_BRANCH}/${TOOL4D_VERSION}/${TOOL4D_BUILD}/${TOOL4D_PLATFORM}/tool4d_v${TOOL4D_VERSION}_${TOOL4D_PLATFORM}${TOOL4D_SUFFIX}.tar.xz" >> $GITHUB_ENV
+      - name: get tool4d
+        id: get
+        if: ${{ env.platform }}
+        uses: ./.github/workflows/get-tool.yml
+        with:
+          platform: ${{ env.platform }}
+          labels: ${{ toJSON(matrix.os) }}
+          branch: ${{ env.TOOL4D_BRANCH }}
+          version: ${{ env.TOOL4D_VERSION }}
+          build: ${{ env.TOOL4D_BUILD }}
 
       - name: checkout repository
         if: ${{ env.platform }}
         uses: actions/checkout@v4
-
-      - name: download tool4d
-        if: ${{ env.platform }}
-        run: |          
-          curl "${CURL_DOWNLOAD_URL}" -o tool4d.tar.xz -sL
-          tar xvJf tool4d.tar.xz
-        shell: bash  
         
 # end of generic code
 # customise the fail condition here
@@ -109,3 +76,6 @@ jobs:
             exit 1
           fi
         shell: bash
+        env:
+          TOOL4D_EXECUTABLE_PATH: ${{ steps.get.outputs.tool4d_executable_path }}
+          CURL_DOWNLOAD_URL: ${{ steps.get.outputs.tool4d_download_url }}
