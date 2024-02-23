@@ -3,15 +3,15 @@ description: Run unit test for the current application
 inputs:
   tool4d_download_url:
     required: false
-  type: string
-    tool4d_executable_path: 
-  required: true
+    type: string
+  tool4d_executable_path: 
+    required: true
     type: string
   startup_method: 
     required: true
-  type: string  
-    project_path: 
-  required: true
+    type: string  
+  project_path: 
+    required: true
     type: string  
 
 runs:
