@@ -1,5 +1,11 @@
 # 4d-topic-cicd
 
+# workflows
+
+## Test
+
+* invoked any time there is a push to the `main` branch
+* runs on github hosted `macos-latest` and/or `windows-latest`
 
 ### 資料
 
