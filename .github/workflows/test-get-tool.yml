@@ -1,4 +1,4 @@
-name: Test Get Tool
+name: 🧪Test Get Tool
 
 on:
   workflow_dispatch: 
