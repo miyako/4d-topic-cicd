@@ -1,0 +1,11 @@
+name: Test Bump
+
+on:
+  workflow_dispatch: 
+
+jobs:
+
+  test:
+    uses: ./.github/workflows/bump.yml
+    with:
+      mode: patch
