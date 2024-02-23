@@ -97,7 +97,7 @@ This workflow does the following:
 6. Checkout the current repository
 7. Checkout the latest [`compiler`](https://github.com/miyako/4d-class-compiler) project from releases
 8. Download [`tool4d`](https://developer.4d.com/docs/Admin/cli/#using-tool4d)
-9. Build, sign for distribtuion (Develooper ID Application), archive, notarise, staple the product
+9. Build, sign for distribtuion (Developer ID Application), archive, notarise, staple the product
 10. Uploaded .dmg to the release created earlier
 
 ---
