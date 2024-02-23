@@ -19,7 +19,7 @@ env:
 
 jobs:
 
-  test:
+  craete-release:
     runs-on: [ubuntu-latest]
 
     steps:
