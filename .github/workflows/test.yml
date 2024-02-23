@@ -57,7 +57,7 @@ jobs:
         timeout-minutes: 1
         if: ${{ matrix.os == 'windows-latest' }}
         run: |     
-          curl https://resources-download.4d.com/release/20.x/20.2/latest/win/tool4d_v20.2_win.tar.xz -o tool4d.tar.xz -f -k -sL
+          $(curl $env.CURL_DOWNLOAD_URL -sL)
           tar xvJf tool4d.tar.xz -C tool4d       
       - name: download tool4d macos
         if: ${{ matrix.os == 'macos-latest' }}
@@ -73,8 +73,8 @@ jobs:
         if: ${{ matrix.os == 'windows-latest' }}
         run: |          
           $env:TOOL4D_EXECUTABLE_PATH $env:PROJECT_PATH --startup-method=$env:PROJECT_STARTUP_METHOD --dataless
-          UTestResult=`cat application/UTestResult.txt`
-          value=`head -n 1 application/UTestResult.txt`
+          UTestResult=$(gc application/UTestResult.txt)
+          value=$(gc application/UTestResult.txt | select -first 1)
           rm application/UTestResult.txt
           if [ "$value" = "Unit tests failed" ]
           then
