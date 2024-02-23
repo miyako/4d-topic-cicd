@@ -65,7 +65,6 @@ jobs:
 # in the example below, we test the result log file
 
       - name: unit tests
-        if: ${{ env.platform }}
         run: |
           ${TOOL4D_EXECUTABLE_PATH} ${PROJECT_PATH} --startup-method=${PROJECT_STARTUP_METHOD} --dataless
           UTestResult=`cat application/UTestResult.txt`
