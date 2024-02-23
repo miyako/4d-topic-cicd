@@ -5,9 +5,9 @@ on:
     branches:
     - main
     paths:
-      - '**/*.4dm'
-      - '**/*.4DForm'
-      - '**/*.4DCatalog'      
+      - '*/Project/Sources/**/*.4dm'
+      - '*/Project/Sources/*/*.4DForm'
+      - '*/Project/Sources/*.4DCatalog'      
   workflow_dispatch:
   workflow_call:
   
