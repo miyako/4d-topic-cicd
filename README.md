@@ -5,6 +5,20 @@
 
 A CI/CD template project.
 
+# Points of Interest
+
+A [Run Tests](https://github.com/miyako/4d-topic-cicd/blob/main/.github/workflows/run-tests.yml) workflow is automatically triggered when code is changed in the `main` branch. 
+
+This workflow does the following
+
+1. launch 2 GitHub hosted runners: `windows-latest` `macos-latest`
+2. checkout the current repository
+3. checkout the latest [`compiler`](https://github.com/miyako/4d-class-compiler) project from releases
+4. download `tool4d`
+5. run a specific `--start-method` with `tool4d` and `compiler` project 
+
+
+
 # workflows
 
 ## [Test](https://github.com/miyako/4d-topic-cicd/blob/main/.github/workflows/test.yml)
