@@ -59,8 +59,8 @@ jobs:
           DEVELOPER_ID="Developer ID Application: keisuke miyako (Y69CWUC25B)"
           PRODUCT_PATH=$PWD/build/application.app
           DMG_PATH=$PWD/build/application.dmg
-          echo "DEVELOPER_ID: $DEVELOPER_ID"
-          codesign --verbose --deep --timestamp --force --sign "$DEVELOPER_ID" --options=runtime 
+          echo "codesign for distribution: $DEVELOPER_ID"
+          codesign --verbose --deep --timestamp --force --sign "$DEVELOPER_ID" --options=runtime $PRODUCT_PATH 
           hdiutil create -format UDBZ -plist -srcfolder $PRODUCT_PATH $DMG_PATH
           xcrun notarytool submit --keychain-profile "notarytool" $DMG_PATH
           xcrun stapler staple $DMG_PATH
