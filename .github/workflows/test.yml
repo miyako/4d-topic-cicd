@@ -44,9 +44,9 @@ jobs:
     runs-on: macos-latest
     steps:
       - name: test
-          run echo "${OS}" 
-          env:
-            OS: ${{ env.TOOL4D_BRANCH }}
+        run: echo "${OS}" 
+        env:
+          OS: ${{ env.TOOL4D_BRANCH }}
   # get: 
   #   strategy:
   #     matrix:
