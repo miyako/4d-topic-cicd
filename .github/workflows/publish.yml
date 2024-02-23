@@ -73,8 +73,8 @@ jobs:
         with:
           tool4d_download_url: ${{ steps.get.outputs.tool4d_download_url }}
           tool4d_executable_path: ${{ steps.get.outputs.tool4d_executable_path }}
-          startup_method: ${{ input.test_startup_method }}
-          project_path: ${{ input.build_project_path }}  
+          startup_method: ${{ inputs.test_startup_method }}
+          project_path: ${{ inputs.build_project_path }}  
   
   # build:
   #   needs: 
