@@ -1,0 +1,43 @@
+name: Create Release
+
+on:
+  workflow_dispatch: 
+
+  workflow_call: 
+    inputs:
+      version: 
+        required: true
+        type: string
+      mode: 
+        required: true
+        type: string
+
+env:
+
+  RELEASE_NAME: "0.0.0"  
+  TAG_NAME: "patch-0.0.0"
+
+jobs:
+
+  test:
+    runs-on: [ubuntu-latest]
+
+    steps:
+      - name: set version
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.version != null }}
+        run: |
+          echo "RELEASE_NAME=${VERSION}" >> $GITHUB_ENV
+          echo "TAG_NAME=${MODE}-${VERSION}" >> $GITHUB_ENV
+        env: 
+          VERSION: ${{ input.version }}
+          MODE: ${{ input.mode }}
+      - name: create release
+        id: release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
+        with:
+          tag_name: ${{ env.TAG_NAME }}
+          release_name: ${{ env.RELEASE_NAME }}
+          draft: false
+          prerelease: false  
