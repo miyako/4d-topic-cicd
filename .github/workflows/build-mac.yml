@@ -1,0 +1,74 @@
+name: Build
+
+on:      
+  push:
+    branches:
+      - main
+      
+  workflow_call: 
+    inputs:
+      version: 
+        required: true
+        type: string
+      mode: 
+        required: true
+        type: string
+      upload_url:
+        required: true
+        type: string
+      development:
+        required: true
+        type: boolean
+
+env: 
+
+  DEVELOPER_ID: "Developer ID Application: keisuke miyako (Y69CWUC25B)"
+  BUILD_DIR: build        
+  PRODUCT_NAME: application   
+  NOTARYTOOL_KEYCHAIN_PROFILE: notarytool
+  BUILD_PROJECT_PATH: application/Project/application.4DProject
+  BUILD_SETTINGS_PATH: application/Settings/buildApp.4DSettings
+  
+jobs:
+          
+  build:
+    runs-on: [self-hosted, macos]
+    
+    steps:
+      - name: checkout compiler repo
+        uses: actions/checkout@v4
+        with:
+          repository: miyako/4d-class-compiler
+          path: compiler
+      - name: compile project
+        run: |
+          tool4d.app/Contents/MacOS/tool4d ./compiler/Project/compiler.4DProject --startup-method=localbuild --user-param=${PWD}/${BUILD_SETTINGS_PATH},${PWD}/${BUILD_PROJECT_PATH} --dataless
+      - name: prepare for distribution
+        if: ${{ inputs.development }}
+        run: |
+          PRODUCT_PATH=${PWD}/${BUILD_DIR}/${PRODUCT_NAME}.app
+          DMG_PATH=${PWD}/${BUILD_DIR}/${PRODUCT_NAME}.dmg
+          codesign --verbose --deep --timestamp --force --sign "${DEVELOPER_ID}" --options=runtime ${PRODUCT_PATH} 
+          rm -f "${DMG_PATH}"
+          hdiutil create -format UDBZ -plist -srcfolder ${PRODUCT_PATH} ${DMG_PATH}
+          xcrun notarytool submit --keychain-profile "${NOTARYTOOL_KEYCHAIN_PROFILE}" ${DMG_PATH} --wait
+          xcrun stapler staple ${DMG_PATH}
+
+      - name: setup
+        run: |
+          echo "ASSET_NAME=${PRODUCT_NAME}.dmg" >> $GITHUB_ENV
+          echo "ASSET_PATH=./${BUILD_DIR}/${PRODUCT_NAME}.dmg" >> $GITHUB_ENV
+        env:
+          BUILD_DIR: ${{ env.BUILD_DIR }}
+          PRODUCT_NAME: ${{ env.PRODUCT_NAME }}
+          
+      - name: upload product
+        if: ${{ inputs.development }}
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ inputs.upload_url }}
+          asset_path: ${{ env.ASSET_PATH }}
+          asset_name: ${{ env.ASSET_NAME }}
+          asset_content_type: application/octet-stream
