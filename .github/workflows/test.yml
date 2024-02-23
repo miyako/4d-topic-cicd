@@ -30,7 +30,7 @@ jobs:
   get:
     strategy:
       matrix:
-        TOOL4D_PLATFORM: [windows-latest, macos-latest]
+        TOOL4D_PLATFORM: ["windows-latest", "macos-latest"]
         TOOL4D_BRANCH: [20.x, 20.x]
         TOOL4D_VERSION: [20.2, 20.2]
         TOOL4D_BUILD: [latest, latest] 
@@ -38,7 +38,7 @@ jobs:
     uses: miyako/4D/.github/workflows/get-tool.yml@v1
     with:
       platform: ${{ toJSON(matrix.TOOL4D_PLATFORM) }}
-      labels: ${{ matrix.TOOL4D_PLATFORM }}
+      labels: ${{ toJSON(matrix.TOOL4D_PLATFORM) }}
       branch: ${{ matrix.TOOL4D_BRANCH }}
       version: ${{ matrix.TOOL4D_VERSION }}
       build: ${{ matrix.TOOL4D_BUILD }}
