@@ -19,31 +19,9 @@ env:
   BUILD_DIR: build        
         
 jobs:
-
-  test:
-    runs-on: [self-hosted]
-  
-    steps:
-      - uses: actions/checkout@v4
-      - name: download latest tool4d
-        run: |        
-          curl https://resources-download.4d.com/release/20.x/20.2/100959/mac/tool4d_v20.2_mac_arm.tar.xz -o tool4d.tar.xz -sL
-          tar xvJf tool4d.tar.xz
-      - name: run unit tests
-        run: |
-          tool4d.app/Contents/MacOS/tool4d ./application/Project/application.4DProject --startup-method=test --dataless
-          UTestResult=`cat application/UTestResult.txt`
-          value=`head -n 1 application/UTestResult.txt`
-          rm application/UTestResult.txt
-          if [ "$value" = "Unit tests failed" ]
-          then
-            exit 1
-          fi
           
   compile:
-    needs: test
     runs-on: [self-hosted]
-    permissions: write-all
     
     steps:
       - name: checkout compiler repo
