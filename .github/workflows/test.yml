@@ -15,6 +15,9 @@ jobs:
         TOOL4D_BUILD: [latest] 
     runs-on: ${{ matrix.TOOL4D_PLATFORM }}
     steps:
+
+      - name: checkout 
+        uses: actions/checkout@v4
     
       - name: get tool4d
         id: get
@@ -24,9 +27,6 @@ jobs:
           branch: ${{ matrix.TOOL4D_BRANCH }}
           version: ${{ matrix.TOOL4D_VERSION }}
           build: ${{ matrix.TOOL4D_BUILD }}
-
-      - name: checkout 
-        uses: actions/checkout@v4
           
       - name: run tests
         uses: ./.github/actions/run-tests
