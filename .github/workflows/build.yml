@@ -47,15 +47,29 @@ jobs:
       - name: compile project
         run: |
           tool4d.app/Contents/MacOS/tool4d ./compiler/Project/compiler.4DProject --startup-method=localbuild --user-param=$PWD/application/Settings/buildApp.4DSettings,$PWD/application/Project/application.4DProject --dataless
-      - name: check context
+      - name: prepare for distribution
         if: ${{ github.event_name == 'workflow_run' && github.event.workflow && github.event.workflow.name == 'Publish' }}
         run: |
           DEVELOPER_ID="Developer ID Application: keisuke miyako (Y69CWUC25B)"
           PRODUCT_PATH=$PWD/build/application.app
           DMG_PATH=$PWD/build/application.dmg
-          echo "codesign for distribution: $DEVELOPER_ID"
           codesign --verbose --deep --timestamp --force --sign "$DEVELOPER_ID" --options=runtime $PRODUCT_PATH 
           hdiutil create -format UDBZ -plist -srcfolder $PRODUCT_PATH $DMG_PATH
           xcrun notarytool submit --keychain-profile "notarytool" $DMG_PATH --wait
           xcrun stapler staple $DMG_PATH
-        
+      - name: get version
+        run: |
+          version=`cat package.json | jq -r '.version'`
+      - name: create release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
+        with:
+          tag_name: ${version}
+          release_name: ${version}
+          draft: false
+          prerelease: false          
+      - uses: actions/upload-artifact@v4
+          with:
+            name: application.dmg
+            path: ./build/application.dmg
