@@ -40,7 +40,7 @@ env:
   
 jobs:
 
-  what:
+  get:
     runs-on: macos-latest
     steps:
       - name: test
