@@ -57,7 +57,7 @@ jobs:
     steps:
     - name: echo 
       run: |
-        echo "TOOL4D_BUILD: ${TOOL4D_BUILD}"
+        echo "TOOL4D_BUILD: $TOOL4D_BUILD"
       env: 
         TOOL4D_BUILD: ${{ env.TOOL4D_BUILD }}
         TOOL4D_BRANCH: ${{ env.TOOL4D_BRANCH }}
