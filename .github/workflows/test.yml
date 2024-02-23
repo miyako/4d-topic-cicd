@@ -29,6 +29,7 @@ jobs:
 
   test:
     strategy:
+      fail-fast: false
       matrix:
         TOOL4D_PLATFORM: ["windows-latest", "macos-latest"]
         TOOL4D_BRANCH: [20.x]
