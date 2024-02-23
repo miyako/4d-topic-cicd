@@ -4,11 +4,13 @@ on:
   workflow_call: 
     inputs:
       mode: 
-        required: false
+        required: true
         type: string
     outputs:
        version:
          value: ${{ jobs.bump.outputs.version }}
+       mode:
+         value: ${{ inputs.mode }}
         
 jobs:
 
