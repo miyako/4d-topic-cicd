@@ -1,4 +1,4 @@
-name: Test Create Relase
+name: Test Create Release
 
 on:
   workflow_run: 
