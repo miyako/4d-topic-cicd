@@ -1,0 +1,53 @@
+name: Text
+
+on:
+  push:
+    branches:
+      - main
+      
+  workflow_dispatch: 
+
+env: 
+  TOOL4D_BRANCH: 20.x
+  TOOL4D_VERSION: 20.2
+  TOOL4D_BUILD: latest 
+  TOOL4D_SUFFIX: ""
+  TOOL4D_EXECUTABLE_PATH: ""
+  PROJECT_STARTUP_METHOD: test
+  PROJECT_PATH: ./application/Project/application.4DProject
+  
+jobs:
+  test:
+    - uses: actions/checkout@v4
+      strategy: 
+        matrix:
+          os: [windows-latest, macos-latest]
+      steps:
+        - name: platform windows
+          if: ${{ matrix.os == 'windows-latest' }}
+          run: |
+            echo "TOOL4D_NAME=win" >> $GITHUB_ENV
+            echo "TOOL4D_SUFFIX=" >> $GITHUB_ENV
+            echo "TOOL4D_EXECUTABLE_PATH=tool4d/tool4d.exe" >> $GITHUB_ENV  
+        - name: platform macos    
+          if: ${{ matrix.os == 'macos-latest' }}
+          run: |
+            echo "TOOL4D_NAME=mac" >> $GITHUB_ENV
+            echo "TOOL4D_SUFFIX=_arm" >> $GITHUB_ENV  
+            echo "TOOL4D_EXECUTABLE_PATH=tool4d.app/Contents/MacOS/tool4d" >> $GITHUB_ENV  
+        - name: download latest tool4d
+          run: |        
+            curl https://resources-download.4d.com/release/$TOOL4D_BRANCH/$TOOL4D_VERSION/$TOOL4D_BUILD/$TOOL4D_PLATFORM/tool4d_v$TOOL4D_VERSION_$TOOL4D_PLATFORM$TOOL4D_SUFFIX.tar.xz -o tool4d.tar.xz -sL
+            tar xvJf tool4d.tar.xz
+            
+        - name: run unit tests
+          run: |
+            $TOOL4D_EXECUTABLE_PATH $PROJECT_PATH --startup-method=$PROJECT_STARTUP_METHOD --dataless
+            UTestResult=`cat application/UTestResult.txt`
+            value=`head -n 1 application/UTestResult.txt`
+            rm application/UTestResult.txt
+            if [ "$value" = "Unit tests failed" ]
+            then
+              exit 1
+            fi
+            
