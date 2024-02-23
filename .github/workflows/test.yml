@@ -43,27 +43,15 @@ jobs:
   get:
     strategy:
       matrix:
-        os: [windows-latest, macos-latest]
-    runs-on: ${{ matrix.os }}    
-    
-    # uses: miyako/4D/.github/workflows/get-tool.yml@v1
-    # with:
-    #   platform: ${{ toJSON(matrix.os) }}
-    #   labels: ${{ toJSON(matrix.os) }}
-    #   branch: 20.x
-    #   version: 20.2
-    #   build: latest
-    
-    steps:
-    - name: echo 
-      run: |
-        echo "TOOL4D_BUILD: $TOOL4D_BUILD"
-      env: 
-        TOOL4D_BUILD: ${{ env.TOOL4D_BUILD }}
-        TOOL4D_BRANCH: ${{ env.TOOL4D_BRANCH }}
-        TOOL4D_VERSION: ${{ env.TOOL4D_VERSION }}
-        TOOL4D_PLATFORM: ${{ env.TOOL4D_PLATFORM }}
-      
+        os: [windows-latest, macos-latest]    
+    uses: miyako/4D/.github/workflows/get-tool.yml@v1
+    with:
+      platform: ${{ toJSON(matrix.os) }}
+      labels: ${{ toJSON(matrix.os) }}
+      branch: ${{ env.TOOL4D_BRANCH }}
+      version: ${{ env.TOOL4D_VERSION }}
+      build: ${{ env.TOOL4D_BUILD }}
+          
   # get: 
   #   strategy:
   #     matrix:
