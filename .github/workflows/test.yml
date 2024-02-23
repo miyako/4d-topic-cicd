@@ -39,6 +39,7 @@ env:
   PROJECT_PATH: ./application/Project/application.4DProject
   
 jobs:
+
   get: 
     strategy:
       matrix:
@@ -47,9 +48,9 @@ jobs:
     with:
       platform: ${{ matrix.os }}
       labels: ${{ matrix.os }}
-      branch: ${{ env.TOOL4D_BRANCH }}
-      version: ${{ env.TOOL4D_VERSION }}
-      build: ${{ env.TOOL4D_BUILD }}
+      branch: ${{ 20.x }}
+      version: ${{ 20.2 }}
+      build: ${{ latest }}
       
   test:
     strategy:
