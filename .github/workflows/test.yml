@@ -48,9 +48,9 @@ jobs:
     with:
       platform: ${{ matrix.os }}
       labels: ${{ matrix.os }}
-      branch: ${{ 20.x }}
-      version: ${{ 20.2 }}
-      build: ${{ latest }}
+      branch: 20.x
+      version: 20.2
+      build: latest
       
   test:
     strategy:
