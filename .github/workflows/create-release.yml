@@ -11,7 +11,10 @@ on:
       mode: 
         required: true
         type: string
-
+    outputs:
+       upload_url:
+         value: ${{ jobs.create.outputs.upload_url }}
+         
 env:
 
   RELEASE_NAME: "0.0.0"  
@@ -19,9 +22,10 @@ env:
 
 jobs:
 
-  craete-release:
+  create:
     runs-on: [ubuntu-latest]
-
+    outputs:
+      upload_url: ${{ steps.release.outputs.upload_url }}
     steps:
       - name: set version
         if: ${{ github.event_name == 'workflow_dispatch' && inputs.version != null }}
