@@ -1,0 +1,29 @@
+name: 🌀Test for macOS locally
+
+on:
+  workflow_dispatch:
+ 
+jobs:     
+
+  get:
+    runs-on: [macos, self-hosted]
+    steps:
+      - name: get tool4d
+        id: get
+        uses: miyako/4D/.github/actions/get-tool@v1
+        with:
+          platform: macos
+          branch: 20.x
+          version: 20.2
+          build: latest
+
+      - name: checkout 
+        uses: actions/checkout@v4
+          
+      - name: run tests
+        uses: ./.github/actions/run-tests
+        with:
+          tool4d_download_url: ${{ steps.get.outputs.tool4d_download_url }}
+          tool4d_executable_path: ${{ steps.get.outputs.tool4d_executable_path }}
+          startup_method: test
+          project_path: ./application/Project/application.4DProject          
