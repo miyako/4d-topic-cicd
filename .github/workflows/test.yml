@@ -37,7 +37,7 @@ jobs:
       # env is unavailable in a strategy
     uses: miyako/4D/.github/workflows/get-tool.yml@v1
     with:
-      platform: ${{ matrix.TOOL4D_PLATFORM }}
+      platform: ${{ toJSON(matrix.TOOL4D_PLATFORM) }}
       labels: ${{ matrix.TOOL4D_PLATFORM }}
       branch: ${{ matrix.TOOL4D_BRANCH }}
       version: ${{ matrix.TOOL4D_VERSION }}
