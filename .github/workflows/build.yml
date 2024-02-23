@@ -45,7 +45,8 @@ jobs:
   compile:
     needs: test
     runs-on: [self-hosted]
-
+    permissions: write-all
+    
     steps:
       - name: checkout compiler repo
         uses: actions/checkout@v4
