@@ -40,14 +40,13 @@ jobs:
           echo "TOOL4D_EXECUTABLE_PATH=tool4d.app/Contents/MacOS/tool4d" >> $GITHUB_ENV  
       - name: checkout repository
         uses: actions/checkout@v4
-      - run: echo "TOOL4D_NAME=tool4d_v$TOOL4D_VERSION_$TOOL4D_PLATFORM$TOOL4D_SUFFIX.tar.xz" >> $GITHUB_ENV   
       - name: download tool4d
-        run: |        
+        run: |          
+          echo "TOOL4D_NAME=tool4d_v${TOOL4D_VERSION}_${TOOL4D_PLATFORM}${TOOL4D_SUFFIX}.tar.xz" >> $GITHUB_ENV
+          echo "CURL_DOWNLOAD_URL=${TOOL4D_URL}/${TOOL4D_BRANCH}/${TOOL4D_VERSION}/${TOOL4D_BUILD}/${TOOL4D_PLATFORM}/${TOOL4D_NAME}" >> $GITHUB_ENV
           curl ${CURL_DOWNLOAD_URL} -o tool4d.tar.xz -sL
           tar xvJf tool4d.tar.xz
-        env: 
-          CURL_DOWNLOAD_URL: ${{ join([env.TOOL4D_URL, env.TOOL4D_BRANCH, env.TOOL4D_VERSION, env.TOOL4D_BUILD, env.TOOL4D_PLATFORM, env.TOOL4D_NAME], ',') }}
-          
+
 # end of generic code
 # customise the fail condition here
 # in the example below, we test the result log file
