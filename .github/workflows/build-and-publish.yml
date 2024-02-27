@@ -18,9 +18,6 @@ on:
         - minor 
         - major
         required: true
-      developer_id: 
-        type: string
-        default: "Developer ID Application: keisuke miyako (Y69CWUC25B)"
       build_dir: 
         type: string
         default: build
@@ -90,7 +87,6 @@ jobs:
           version: ''
           mode: ''
           upload_url: ''
-          developer_id: ''
           build_dir: build
           product_name: application
           notarytool_keychain_profile: ''
@@ -126,7 +122,6 @@ jobs:
           version: ${{ needs.bump.outputs.version }}
           mode: ${{ needs.bump.outputs.mode }}
           upload_url: ${{ needs.release.outputs.upload_url }}
-          developer_id: ${{ inputs.developer_id }}
           build_dir: ${{ inputs.build_dir }}
           product_name: ${{ inputs.product_name }}
           notarytool_keychain_profile: ${{ inputs.notarytool_keychain_profile }}
