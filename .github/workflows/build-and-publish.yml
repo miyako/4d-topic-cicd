@@ -18,6 +18,9 @@ on:
         - minor 
         - major
         required: true
+      build_dir: 
+        type: string
+        default: build
       product_name: 
         type: string
         default: application
@@ -84,6 +87,7 @@ jobs:
           version: ''
           mode: ''
           upload_url: ''
+          build_dir: build
           product_name: application
           notarytool_keychain_profile: ''
           build_project_path: application/Project/application.4DProject
@@ -118,6 +122,7 @@ jobs:
           version: ${{ needs.bump.outputs.version }}
           mode: ${{ needs.bump.outputs.mode }}
           upload_url: ${{ needs.release.outputs.upload_url }}
+          build_dir: ${{ inputs.build_dir }}
           product_name: ${{ inputs.product_name }}
           notarytool_keychain_profile: ${{ inputs.notarytool_keychain_profile }}
           build_project_path: ${{ inputs.build_project_path }}
