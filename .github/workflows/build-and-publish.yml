@@ -91,7 +91,9 @@ jobs:
           product_name: application
           notarytool_keychain_profile: ''
           build_project_path: application/Project/application.4DProject
-          build_settings_path: application/Settings/buildApp.4DSettings   
+          build_settings_path: application/Settings/buildApp.4DSettings
+          build_product_folder_name: Final Application
+          build_product_suffix: ''
     
   deployment:
     if: ${{ github.event_name == 'workflow_dispatch' }}
@@ -127,7 +129,9 @@ jobs:
           notarytool_keychain_profile: ${{ inputs.notarytool_keychain_profile }}
           build_project_path: ${{ inputs.build_project_path }}
           build_settings_path: ${{ inputs.build_settings_path }}
-
+          build_product_folder_name: Final Application
+          build_product_suffix: ''
+          
       - name: upload product
         if: ${{ steps.build.outputs.deployment == 'true' }}
         uses: actions/upload-release-asset@v1
