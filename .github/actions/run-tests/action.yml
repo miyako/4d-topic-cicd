@@ -19,7 +19,7 @@ runs:
   steps:
     - name: check platform windows
       run: |
-        ${TOOL4D_EXECUTABLE_PATH} ${PROJECT_PATH} --startup-method=${PROJECT_STARTUP_METHOD} --dataless
+        "${TOOL4D_EXECUTABLE_PATH}" "${PROJECT_PATH}" --startup-method="${PROJECT_STARTUP_METHOD}" --dataless
         UTestResult=`cat application/UTestResult.txt`
         value=`head -n 1 application/UTestResult.txt`
         rm application/UTestResult.txt
