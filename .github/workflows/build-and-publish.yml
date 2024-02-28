@@ -68,7 +68,7 @@ jobs:
           platform: macos
           branch: 20.x
           version: 20.2
-          build: 100959
+          build: latest
           arch: arm    
           
       - name: run tests
