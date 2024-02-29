@@ -117,7 +117,7 @@ This workflow is also triggered automatically, according to the same filter as `
 
 Sample result: [actions/runs/8026309928](https://github.com/miyako/4d-topic-cicd/actions/runs/8026309928)
 
-Because the `deployment` job needs `release`, it is important to `ref: ${{ github.ref }}` to get the latest commit from the `bump` job. Otherwise, the commit that is checked out is the one from when the workflow was triggered which is one version behind.
+Because the `deployment` job needs `release`, it is important to checkout the repository with `ref: ${{ github.ref }}` to get the latest commit from the `bump` job. Otherwise, the commit that is checked out is the one from when the workflow was triggered which is one version behind.
 
 ---
 
