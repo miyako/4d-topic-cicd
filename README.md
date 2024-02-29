@@ -123,7 +123,7 @@ Because the `deployment` job needs the `release` job, it is important to checkou
 
 # Remarks
 
-Although one can [configure the self-hosted runner application as a service](https://docs.github.com/en/actions/hosting-your-own-runners/managing-self-hosted-runners/configuring-the-self-hosted-runner-application-as-a-service?platform=mac), the code codesiging script seems to fail when executed in a background process (maybe there is a workaround, don't know). For the purpose of building 4D applications, it seems better to `./ron.sh` the runner in a Terminal window, manually, or as a login item.
+Although one can [configure the self-hosted runner application as a service](https://docs.github.com/en/actions/hosting-your-own-runners/managing-self-hosted-runners/configuring-the-self-hosted-runner-application-as-a-service?platform=mac), the codesign script seems to fail when executed in a background process (maybe there is a workaround, don't know). For the purpose of building 4D applications, it seems better to `./ron.sh` the runner in a Terminal window, manually, or as a login item.
 
 # References
 
