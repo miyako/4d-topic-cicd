@@ -55,6 +55,7 @@ jobs:
 
   development:
     if: ${{ github.event_name == 'push' }}
+    needs: release
     runs-on: [macos, self-hosted]
     steps:
     
