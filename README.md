@@ -93,7 +93,7 @@ This workflow does the following:
 2. Update `package.json` at the root of the project (the version information in this file is incorporated in the build process)
 3. Create a release that corresponds to the new version
 4. Connect to a self-hosted runner (build must always take place on a self-hosted runner with licenses installed)
-5. (Don not run units tests, which would have been done already on GitHub hosted runners, as described above)
+5. (Do not run units tests, which would have been done already on GitHub hosted runners, as described above)
 6. Checkout the current repository
 7. Checkout the latest [`compiler`](https://github.com/miyako/4d-class-compiler) project from releases
 8. Download [`tool4d`](https://developer.4d.com/docs/Admin/cli/#using-tool4d)
@@ -106,7 +106,7 @@ This workflow is also triggered automatically, according to the same filter as `
 
 1. (Do not prompt for inputs)
 2. (Do not bump the version)
-3. (Do not created releases)
+3. (Do not create releases)
 4. Connect to a self-hosted runner (build must always take place on a self-hosted runner with licenses installed)
 5. Run unit tests
 6. Checkout the current repository
