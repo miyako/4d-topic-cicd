@@ -55,7 +55,6 @@ jobs:
 
   development:
     if: ${{ github.event_name == 'push' }}
-    needs: release
     runs-on: [macos, self-hosted]
     steps:
     
@@ -99,7 +98,6 @@ jobs:
   deployment:
     if: ${{ github.event_name == 'workflow_dispatch' }}
     needs: 
-    - bump
     - release
     runs-on: [macos, self-hosted]
     steps:
