@@ -104,7 +104,9 @@ jobs:
     
       - name: checkout 
         uses: actions/checkout@v4
-        
+        with:
+          ref: ${{ github.ref }}
+          
       - name: get tool4d
         id: get
         uses: miyako/4D/.github/actions/get-tool@v1
