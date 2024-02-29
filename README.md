@@ -97,7 +97,7 @@ This workflow does the following:
 6. Checkout the current repository
 7. Checkout the latest [`compiler`](https://github.com/miyako/4d-class-compiler) project from releases
 8. Download [`tool4d`](https://developer.4d.com/docs/Admin/cli/#using-tool4d)
-9. Build, sign for distribtuion (Developer ID Application), archive, notarise, staple the product
+9. Build, sign, archive, notarise, staple the product
 10. Uploaded .dmg to the release created earlier
 
 Sample result: [actions/runs/8026370678](https://github.com/miyako/4d-topic-cicd/actions/runs/8026370678)
@@ -112,7 +112,7 @@ This workflow is also triggered automatically, according to the same filter as `
 6. Checkout the current repository
 7. Checkout the latest [`compiler`](https://github.com/miyako/4d-class-compiler) project from releases
 8. Download [`tool4d`](https://developer.4d.com/docs/Admin/cli/#using-tool4d)
-9. Build, adhoc sign to run locally
+9. Build, sign the product
 10. (Do not archive or upload the .app)
 
 Sample result: [actions/runs/8026309928](https://github.com/miyako/4d-topic-cicd/actions/runs/8026309928)
