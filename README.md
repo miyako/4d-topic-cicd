@@ -85,7 +85,7 @@ jobs:
           project_path: ${{ matrix.TOOL4D_STARTUP_PROJECT_PATH }}        
 ```
 
-A [🎉Build and Publish](https://github.com/miyako/4d-topic-cicd/blob/main/.github/workflows/publish.yml) workflow can be trigged manually.
+A [🎉Build and Publish](https://github.com/miyako/4d-topic-cicd/blob/main/.github/workflows/build-and-publish.yml) workflow can be trigged manually.
 
 This workflow does the following:
 
