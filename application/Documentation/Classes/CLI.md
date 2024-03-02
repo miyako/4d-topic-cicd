@@ -14,6 +14,36 @@ Print the carriage-return ASCII code.
 
 Print the line-feed ASCII code.
 
+## .EL() 
+
+**.EL**() : cs.CLI
+
+Erase from cursor to end of line.
+
+## .ES() 
+
+**.ES**() : cs.CLI
+
+Erase entire screen.
+
+## .XY() 
+
+**.XY**($x : Integer; $y : Integer) : cs.CLI
+
+Move cursor to (x,y).
+
+## .hideCursor() 
+
+**.hideCursor**() : cs.CLI
+
+Hide cursor.
+
+## .showCursor() 
+
+**.showCursor**() : cs.CLI
+
+Show cursor.
+
 ## .escape() 
 
 **.escape**($message : Text; $style : Text) : Text

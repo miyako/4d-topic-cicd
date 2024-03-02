@@ -39,6 +39,26 @@ Function LF()->$this : cs:C1710.CLI
 	
 	$this:=This:C1470.print(This:C1470.ASCII.LF)
 	
+Function EL()->$this : cs:C1710.CLI
+	
+	$this:=This:C1470.print(This:C1470.ASCII.ESC+"[K")
+	
+Function ES()->$this : cs:C1710.CLI
+	
+	$this:=This:C1470.print(This:C1470.ASCII.ESC+"[2J")
+	
+Function XY($x : Integer; $y : Integer)->$this : cs:C1710.CLI
+	
+	$this:=This:C1470.print(This:C1470.ASCII.ESC+"["+String:C10(Abs:C99($x))+";"+String:C10(Abs:C99($y))+"H")
+	
+Function hideCursor()->$this : cs:C1710.CLI
+	
+	$this:=This:C1470.print(This:C1470.ASCII.ESC+"[?25l")
+	
+Function showCursor()->$this : cs:C1710.CLI
+	
+	$this:=This:C1470.print(This:C1470.ASCII.ESC+"[?25h")
+	
 Function escape($message : Text; $style : Text)->$ANSI : Text
 	
 	$ANSI:=This:C1470._style($style).combine(This:C1470._color($style)).join(";")
