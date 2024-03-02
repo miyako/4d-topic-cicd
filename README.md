@@ -85,7 +85,7 @@ jobs:
           project_path: ${{ matrix.TOOL4D_STARTUP_PROJECT_PATH }}        
 ```
 
-A [🎉Build and Publish](https://github.com/miyako/4d-topic-cicd/blob/main/.github/workflows/publish.yml) workflow can be trigged manually.
+A [🎉Build and Publish](https://github.com/miyako/4d-topic-cicd/blob/main/.github/workflows/build-and-publish.yml) workflow can be trigged manually.
 
 This workflow does the following:
 
@@ -93,11 +93,11 @@ This workflow does the following:
 2. Update `package.json` at the root of the project (the version information in this file is incorporated in the build process)
 3. Create a release that corresponds to the new version
 4. Connect to a self-hosted runner (build must always take place on a self-hosted runner with licenses installed)
-5. (Don not run units tests, which would have been done already on GitHub hosted runners, as described above)
+5. (Do not run units tests, which would have been done already on GitHub hosted runners, as described above)
 6. Checkout the current repository
 7. Checkout the latest [`compiler`](https://github.com/miyako/4d-class-compiler) project from releases
 8. Download [`tool4d`](https://developer.4d.com/docs/Admin/cli/#using-tool4d)
-9. Build, sign for distribtuion (Developer ID Application), archive, notarise, staple the product
+9. Build, sign, archive, notarise, staple the product
 10. Uploaded .dmg to the release created earlier
 
 Sample result: [actions/runs/8026370678](https://github.com/miyako/4d-topic-cicd/actions/runs/8026370678)
@@ -106,22 +106,24 @@ This workflow is also triggered automatically, according to the same filter as `
 
 1. (Do not prompt for inputs)
 2. (Do not bump the version)
-3. (Do not created releases)
+3. (Do not create releases)
 4. Connect to a self-hosted runner (build must always take place on a self-hosted runner with licenses installed)
 5. Run unit tests
 6. Checkout the current repository
 7. Checkout the latest [`compiler`](https://github.com/miyako/4d-class-compiler) project from releases
 8. Download [`tool4d`](https://developer.4d.com/docs/Admin/cli/#using-tool4d)
-9. Build, adhoc sign to run locally
+9. Build, sign the product
 10. (Do not archive or upload the .app)
 
 Sample result: [actions/runs/8026309928](https://github.com/miyako/4d-topic-cicd/actions/runs/8026309928)
+
+Because the `deployment` job needs the `release` job, it is important to checkout the repository with `ref: ${{ github.ref }}` to get the latest commit from the `bump` job. Otherwise, the commit that is checked out would be from the moment the workflow was triggered which is a version behind.
 
 ---
 
 # Remarks
 
-Although one can [configure the self-hosted runner application as a service](https://docs.github.com/en/actions/hosting-your-own-runners/managing-self-hosted-runners/configuring-the-self-hosted-runner-application-as-a-service?platform=mac), the code codesiging script seems to fail when executed in a background process (maybe there is a workaround, don't know). For the purpose of building 4D applications, it seems better to `./ron.sh` the runner in a Terminal window, manually, or as a login item.
+Although one can [configure the self-hosted runner application as a service](https://docs.github.com/en/actions/hosting-your-own-runners/managing-self-hosted-runners/configuring-the-self-hosted-runner-application-as-a-service?platform=mac), the codesign script seems to fail when executed in a background process (maybe there is a workaround, don't know). For the purpose of building 4D applications, it seems better to `./ron.sh` the runner in a Terminal window, manually, or as a login item.
 
 # References
 

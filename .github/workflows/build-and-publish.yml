@@ -98,14 +98,15 @@ jobs:
   deployment:
     if: ${{ github.event_name == 'workflow_dispatch' }}
     needs: 
-    - bump
     - release
     runs-on: [macos, self-hosted]
     steps:
     
       - name: checkout 
         uses: actions/checkout@v4
-        
+        with:
+          ref: ${{ github.ref }}
+          
       - name: get tool4d
         id: get
         uses: miyako/4D/.github/actions/get-tool@v1
@@ -121,8 +122,8 @@ jobs:
         uses: miyako/4D/.github/actions/build-macos@v1
         with:
           deployment: true
-          version: ${{ needs.bump.outputs.version }}
-          mode: ${{ needs.bump.outputs.mode }}
+          version: ${{ needs.release.outputs.version }}
+          mode: ${{ needs.release.outputs.mode }}
           upload_url: ${{ needs.release.outputs.upload_url }}
           build_dir: ${{ inputs.build_dir }}
           product_name: ${{ inputs.product_name }}
