@@ -6,3 +6,4 @@ application/Libraries/lib4d-arm64.dylib
 application/UTestResult.txt
 application/Settings/backup.4DSettings
 application/Components/BuildApp.4dbase/Resources/4d-class-compiler/*
+application/Settings/buildApp.4Dsettings
