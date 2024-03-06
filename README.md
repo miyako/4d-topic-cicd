@@ -53,7 +53,7 @@ jobs:
     
       - name: get tool4d
         id: get
-        uses: miyako/4D/.github/actions/get-tool@v1
+        uses: miyako/4D/.github/actions/tool4d-download@v1
         with:
           platform: ${{ matrix.TOOL4D_PLATFORM }}
           branch: ${{ matrix.TOOL4D_BRANCH }}
