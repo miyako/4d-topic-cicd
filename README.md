@@ -43,7 +43,7 @@ jobs:
       matrix:
         TOOL4D_PLATFORM: ["windows-latest", "macos-latest"]
         TOOL4D_BRANCH: [20.x]
-        TOOL4D_VERSION: [20.2]
+        TOOL4D_VERSION: [20.3]
         TOOL4D_BUILD: [latest] 
     runs-on: ${{ matrix.TOOL4D_PLATFORM }}
     steps:
