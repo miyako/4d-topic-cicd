@@ -3,13 +3,6 @@
 
 If (Get application info:C1599.headless)
 	
-/*
-	
-this method is designed to be executed in utility mode
-https://developer.4d.com/docs/Admin/cli/#tool4d
-	
-*/
-	
 	var $CLI : cs:C1710.CLI
 	$CLI:=cs:C1710.CLI.new()
 	$CLI.logo().version()
@@ -18,8 +11,10 @@ https://developer.4d.com/docs/Admin/cli/#tool4d
 	
 	$UTest:=cs:C1710.UTest.new()
 	
-	$resultText:=$UTest.runAllTests().resultText()
+	$UTest.runAllTests()
 	
-	TEXT TO DOCUMENT:C1237("UTestResult.txt"; $resultText)
+	$stdErr:="Unit tests "+($UTest.UTest_result.length#$UTest.UTest_result.count("success"; True:C214) ? "failed" : "passed")
+	
+	LOG EVENT:C667(Into system standard outputs:K38:9; $stdErr; Error message:K38:3)
 	
 End if 
