@@ -12,7 +12,7 @@ on:
 #  workflow_call:      
  
 env:
-  project_path: ./a-simple-project/Project/a-simple-project.4DProject
+  project_path: ./application/Project/application.4DProject
   startup_method: start
   skip_onstartup: true
   create_data: true
