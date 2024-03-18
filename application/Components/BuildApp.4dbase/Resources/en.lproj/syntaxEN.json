@@ -357,8 +357,13 @@
 			"Summary": ""
 		},
 		"findCertificates()": {
-			"Syntax": "**.findCertificates**() : cs.BuildApp.BuildApp",
+			"Syntax": "**.findCertificates**( *...* : Text ) : cs.BuildApp.BuildApp",
 			"Params": [
+				[
+					"",
+					"Text",
+					"->"
+				],
 				[
 					"",
 					"cs.BuildApp.BuildApp",
