@@ -1,4 +1,4 @@
-name: 🌀Run Tests
+name: Run Tests
 
 on:
   push:
@@ -7,28 +7,35 @@ on:
     paths:
       - '*/Project/Sources/**/*.4dm'
       - '*/Project/Sources/*/*.4DForm'
-      - '*/Project/Sources/*.4DCatalog'      
+      - '*/Project/Sources/*.4DCatalog'
   workflow_dispatch:
-  workflow_call:
+  workflow_call:      
+ 
+env:
+  project_path: application/Project/application.4DProject
+  startup_method: test
+  skip_onstartup: true
+  create_data: true
+  dataless: false
+  data: ''
   
-jobs:     
+jobs:
 
-  get:
+  test:
     strategy:
       fail-fast: false
       matrix:
         TOOL4D_PLATFORM: ["windows-latest", "macos-latest"]
         TOOL4D_BRANCH: [20.x]
         TOOL4D_VERSION: [20.2]
-        TOOL4D_BUILD: [latest] 
-        TOOL4D_STARTUP_METHOD: [test] 
-        TOOL4D_STARTUP_PROJECT_PATH: [./application/Project/application.4DProject] 
+        TOOL4D_BUILD: [latest]
     runs-on: ${{ matrix.TOOL4D_PLATFORM }}
+    
     steps:
 
       - name: checkout 
-        uses: actions/checkout@v4
-    
+        uses: actions/checkout@v4    
+
       - name: get tool4d
         id: get
         uses: miyako/4D/.github/actions/tool4d-download@v1
@@ -37,11 +44,25 @@ jobs:
           branch: ${{ matrix.TOOL4D_BRANCH }}
           version: ${{ matrix.TOOL4D_VERSION }}
           build: ${{ matrix.TOOL4D_BUILD }}
-          
+
       - name: run tests
-        uses: ./.github/actions/run-tests
-        with:
-          tool4d_download_url: ${{ steps.get.outputs.tool4d_download_url }}
+        id: tests
+        uses: miyako/4D/.github/actions/tool4d-execute@v1
+        with:          
           tool4d_executable_path: ${{ steps.get.outputs.tool4d_executable_path }}
-          startup_method: ${{ matrix.TOOL4D_STARTUP_METHOD }}
-          project_path: ${{ matrix.TOOL4D_STARTUP_PROJECT_PATH }}        
+          project_path: ${{ env.project_path }}  
+          startup_method: ${{ env.startup_method }}
+          skip_onstartup: ${{ env.skip_onstartup }}  
+          create_data: ${{ env.create_data }}  
+          dataless: ${{ env.dataless }}  
+          data: ${{ env.data }}  
+
+      - name: print results
+        run: |  
+          echo "stderr: ${stderr}"
+          if [[ "${stderr}" == *failed ]]; then
+          echo "failed"; exit 1
+          fi
+        env:
+          stderr: ${{ steps.tests.outputs.stderr }}
+        shell: bash  
