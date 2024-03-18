@@ -7,3 +7,8 @@ application/UTestResult.txt
 application/Settings/backup.4DSettings
 application/Components/BuildApp.4dbase/Resources/4d-class-compiler/*
 application/Settings/buildApp.4Dsettings
+application/Components/BuildApp.4dbase/userPreferences.miyako/recentTables.json
+application/Components/BuildApp.4dbase/userPreferences.miyako/workspace.json
+application/Components/BuildApp.4dbase/Project/DerivedData/formAttributes.json
+application/Components/BuildApp.4dbase/Project/DerivedData/methodAttributes.json
+application/Components/BuildApp.4dbase/userPreferences.miyako/preferences.4DPreferences

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE base SYSTEM "http://www.4d.com/dtd/2007/base.dtd" >
-<base name="BuildApp" uuid="7239A6E833C241BEBED878CEF25E17E6" collation_locale="ja">
+<base name="BuildApp" uuid="7239A6E833C241BEBED878CEF25E17E6" collation_locale="en">
 	<schema name="DEFAULT_SCHEMA"/>
 	<base_extra>
 		<journal_file journal_file_enabled="true"/>
