@@ -1,15 +1,15 @@
 name: 🌀Run Tests
 
 on:
-#  push:
-#    branches:
-#    - main
-#    paths:
-#      - '*/Project/Sources/**/*.4dm'
-#      - '*/Project/Sources/*/*.4DForm'
-#      - '*/Project/Sources/*.4DCatalog'
+  push:
+    branches:
+    - main
+    paths:
+      - '*/Project/Sources/**/*.4dm'
+      - '*/Project/Sources/*/*.4DForm'
+      - '*/Project/Sources/*.4DCatalog'
   workflow_dispatch:
-#  workflow_call:      
+  workflow_call:      
  
 env:
   project_path: ./application/Project/application.4DProject
