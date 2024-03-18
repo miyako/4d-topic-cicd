@@ -2,6 +2,9 @@
 ![platform](https://img.shields.io/static/v1?label=platform&message=mac-intel%20|%20mac-arm%20|%20win-64&color=blue)
 [![license](https://img.shields.io/github/license/miyako/4d-topic-cicd)](LICENSE)
 ![downloads](https://img.shields.io/github/downloads/miyako/4d-topic-cicd/total)
+![deprecated](https://img.shields.io/badge/-deprecated-inactive)
+
+Current project: https://github.com/miyako/4d-a-simple-project
 
 A CI/CD template project.
 
